@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GenAI4SG @ CIKM 2026</title>
+  <meta name="description" content="GenAI4SG: Workshop on Generative AI for Social Good and Vulnerable Populations, held with CIKM 2026 in Rome, Italy.">
+  <meta name="keywords" content="GenAI4SG, CIKM 2026, generative AI, social good, vulnerable populations, RAG, AI ethics">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+  <link href="assets/css/main.css" rel="stylesheet">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="container-xl d-flex align-items-center justify-content-between py-3">
+      <a class="brand" href="#hero">GenAI4SG <small>@ CIKM 2026</small></a>
+      <nav aria-label="Primary navigation">
+        <ul class="nav-list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#topics">Topics</a></li>
+          <li><a href="#submission">Submission</a></li>
+          <li><a href="#program">Program</a></li>
+          <li><a href="#organizers">Organizers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="hero" class="hero">
+      <div class="container-xl">
+        <div class="hero-kicker">1st Workshop on</div>
+        <h1>Generative AI for Social Good and Vulnerable Populations</h1>
+        <p class="hero-subtitle">
+          A CIKM 2026 workshop on responsible, knowledge-grounded, and deployable generative AI systems serving social-good applications and underserved communities.
+        </p>
+        <div class="event-facts" aria-label="Event details">
+          <span class="event-pill"><i class="bi bi-calendar-event"></i> November 8, 2026</span>
+          <span class="event-pill"><i class="bi bi-geo-alt"></i> Rome, Italy</span>
+          <span class="event-pill"><i class="bi bi-clock-history"></i> Half-day workshop</span>
+        </div>
+        <div class="hero-actions">
+          <a class="btn-main" href="#submission"><i class="bi bi-upload"></i> Submit Paper</a>
+          <a class="btn-ghost" href="https://cikm2026.diag.uniroma1.it/" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> CIKM 2026</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="container-xl">
+        <div class="row g-4 align-items-stretch">
+          <div class="col-lg-7">
+            <div class="section-title">
+              <span class="eyebrow">About The Workshop</span>
+              <h2>Building useful GenAI where the stakes are real.</h2>
+            </div>
+            <p class="lead-copy">
+              Generative AI has become a general-purpose technology for producing text, images, code, and explanations across knowledge-intensive tasks. This creates new opportunities for social good in domains where expertise, data, and resources are scarce, including rare diseases, low-resource education, accessibility, crisis response, sustainability, public-service access, and information integrity.
+            </p>
+            <p>
+              These are also the settings where failures can be most harmful. GenAI systems may hallucinate, reproduce linguistic or cultural biases, privilege high-resource languages, leak sensitive information, amplify inequalities, or impose computational costs that make deployment impractical for low-resource organizations. GenAI4SG brings together researchers working on retrieval-augmented generation, agentic systems, multimodal models, and knowledge-grounded AI to study how these technologies can be responsibly designed, evaluated, and deployed in line with the UN Sustainable Development Goals.
+            </p>
+            <p>
+              The workshop is aligned with the CIKM community, drawing on information retrieval, knowledge management, databases, data mining, machine learning, NLP, and recommender systems to retrieve evidence, build and maintain knowledge bases, generate grounded explanations, evaluate information quality, and deploy systems over heterogeneous data.
+            </p>
+          </div>
+          <div class="col-lg-5">
+            <div class="info-box rome-panel h-100">
+              <img src="assets/img/rome-trevi.jpg" alt="Trevi Fountain in Rome">
+              <div class="rome-caption">
+                Held with the 35th ACM International Conference on Information and Knowledge Management, November 7-11, 2026.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="date-grid mt-5">
+          <div class="date-card">
+            <i class="bi bi-send"></i>
+            <strong>August 24, 2026</strong>
+            <span>Recommended paper submission deadline</span>
+          </div>
+          <div class="date-card">
+            <i class="bi bi-check2-circle"></i>
+            <strong>September 23, 2026</strong>
+            <span>Recommended acceptance notification</span>
+          </div>
+          <div class="date-card">
+            <i class="bi bi-file-earmark-check"></i>
+            <strong>TBD</strong>
+            <span>Camera-ready papers</span>
+          </div>
+          <div class="date-card">
+            <i class="bi bi-people"></i>
+            <strong>November 8, 2026</strong>
+            <span>Workshop day at CIKM</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="topics" class="section band">
+      <div class="container-xl">
+        <div class="section-title">
+          <span class="eyebrow">Call For Contributions</span>
+          <h2>Topics of interest</h2>
+          <p>We welcome technical, empirical, resource, demo, and position papers on methods, systems, datasets, benchmarks, and applications.</p>
+        </div>
+        <ul class="topic-list">
+          <li>Retrieval-augmented generation and evidence-grounded GenAI for high-impact domains.</li>
+          <li>Knowledge-graph integration, semantic grounding, fact-checking, and source verification.</li>
+          <li>LLM agents and agentic workflows for social-good applications.</li>
+          <li>Multimodal GenAI for health, education, accessibility, crisis response, and sustainability.</li>
+          <li>Synthetic data generation, data-centric GenAI, and low-resource adaptation.</li>
+          <li>Benchmarks, datasets, and evaluation protocols for societal benefit and deployment risk.</li>
+          <li>Fairness, robustness, privacy, explainability, and human-centered assessment.</li>
+          <li>Efficient, sustainable, and practical deployment for public-interest organizations.</li>
+          <li>Applications supporting vulnerable and underserved populations.</li>
+          <li>Information integrity, misinformation detection, and coordinated manipulation analysis.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="submission" class="section">
+      <div class="container-xl">
+        <div class="row g-4">
+          <div class="col-lg-7">
+            <div class="section-title">
+              <span class="eyebrow">Submission</span>
+              <h2>Guidelines</h2>
+            </div>
+            <div class="info-box">
+              <p>
+                Submissions will be handled electronically through EasyChair or a similar system. Papers should follow the ACM two-column format. The submission link will be announced soon.
+              </p>
+              <p>
+                We plan to accept full papers presenting mature technical or empirical contributions; short papers and position papers presenting preliminary results or research agendas; and dataset, benchmark, and demo papers presenting reusable resources or systems.
+              </p>
+              <p>
+                Each submission will receive at least two reviews. Evaluation criteria include relevance to the workshop, technical quality, novelty, clarity, methodological soundness, potential societal benefit, and awareness of risks for vulnerable or underserved populations.
+              </p>
+              <p class="mb-0">
+                Participation is open to all registered CIKM attendees. At least one author of each accepted paper is expected to register and present the work on-site in Rome.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="callout h-100">
+              <h3>Important Notes</h3>
+              <p>
+                Workshop papers will not be included in the ACM proceedings by default. Archival publication options and opt-in proceedings details will be announced in accordance with CIKM policies.
+              </p>
+              <p>
+                All deadlines are 11:59 PM Anywhere on Earth unless stated otherwise.
+              </p>
+              <a class="btn-main" href="https://www.acm.org/publications/proceedings-template" target="_blank" rel="noopener"><i class="bi bi-filetype-tex"></i> ACM Template</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="program" class="section band">
+      <div class="container-xl">
+        <div class="section-title">
+          <span class="eyebrow">Program</span>
+          <h2>Tentative half-day schedule</h2>
+          <p>Final times, accepted papers, and invited speakers will be announced after the submission and review process.</p>
+        </div>
+        <div class="program-list">
+          <div class="program-item">
+            <div class="program-time">5 min</div>
+            <div>
+              <h3>Opening</h3>
+              <p class="mb-0">Workshop motivation and overview.</p>
+            </div>
+          </div>
+          <div class="program-item">
+            <div class="program-time">45 min</div>
+            <div>
+              <h3>Invited Talk</h3>
+              <p class="mb-0">Generative AI systems for social-good applications, with Q&amp;A. Speaker TBD.</p>
+            </div>
+          </div>
+          <div class="program-item">
+            <div class="program-time">40 min</div>
+            <div>
+              <h3>Paper Session I</h3>
+              <p class="mb-0">Methods and systems, including RAG, knowledge grounding, multimodal models, agents, synthetic data, and efficient deployment, followed by joint panel Q&amp;A.</p>
+            </div>
+          </div>
+          <div class="program-item">
+            <div class="program-time">30 min</div>
+            <div>
+              <h3>Coffee Break and Interaction</h3>
+              <p class="mb-0">Informal discussion, posters, and demo interaction.</p>
+            </div>
+          </div>
+          <div class="program-item">
+            <div class="program-time">40 min</div>
+            <div>
+              <h3>Paper Session II</h3>
+              <p class="mb-0">Applications, evaluation, and deployment in health, education, accessibility, crisis response, sustainability, and information integrity, followed by joint panel Q&amp;A.</p>
+            </div>
+          </div>
+          <div class="program-item">
+            <div class="program-time">20 min</div>
+            <div>
+              <h3>Open Discussion and Closing</h3>
+              <p class="mb-0">Open challenges for GenAI systems serving vulnerable and underserved populations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="speakers" class="section">
+      <div class="container-xl">
+        <div class="section-title text-center mx-auto">
+          <span class="eyebrow">Invited Speakers</span>
+          <h2>TBD</h2>
+          <p class="mx-auto">Updates will be posted as speakers are confirmed.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="organizers" class="section band">
+      <div class="container-xl">
+        <div class="section-title">
+          <span class="eyebrow">Organizing Committee</span>
+          <h2>Organizers</h2>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-6">
+            <article class="person-card">
+              <div class="person-head">
+                <img src="assets/img/organizers/martino.jpeg" alt="Martino Ciaperoni">
+                <div>
+                  <h3>Martino Ciaperoni</h3>
+                  <span class="person-role">Postdoctoral Research Scholar</span>
+                  <span class="person-affiliation">Scuola Normale Superiore</span>
+                  <div class="person-links">
+                    <a href="mailto:martino.ciaperoni@sns.it" aria-label="Email Martino Ciaperoni"><i class="bi bi-envelope"></i></a>
+                    <a href="https://scholar.google.com/citations?user=njKtJPUAAAAJ&hl=en" aria-label="Google Scholar"><i class="bi bi-mortarboard"></i></a>
+                    <a href="https://maciap.github.io/" aria-label="Website"><i class="bi bi-globe2"></i></a>
+                  </div>
+                </div>
+              </div>
+              <p class="mb-0">His work spans data mining, data management, and trustworthy AI, currently focusing on biomedical applications and explainability of transformer-based language models.</p>
+            </article>
+          </div>
+          <div class="col-md-6">
+            <article class="person-card">
+              <div class="person-head">
+                <img src="assets/img/organizers/minici.jpg" alt="Marco Minici">
+                <div>
+                  <h3>Marco Minici</h3>
+                  <span class="person-role">Research Scientist</span>
+                  <span class="person-affiliation">ICAR-CNR, National Research Council of Italy</span>
+                  <div class="person-links">
+                    <a href="mailto:marco.minici@icar.cnr.it" aria-label="Email Marco Minici"><i class="bi bi-envelope"></i></a>
+                    <a href="https://scholar.google.it/citations?user=v-2peSwAAAAJ&hl=it" aria-label="Google Scholar"><i class="bi bi-mortarboard"></i></a>
+                    <a href="https://mminici.github.io" aria-label="Website"><i class="bi bi-globe2"></i></a>
+                  </div>
+                </div>
+              </div>
+              <p class="mb-0">His work focuses on online social safety, social computing, algorithmic bias, and ML methods for detecting coordinated information operations.</p>
+            </article>
+          </div>
+          <div class="col-md-6">
+            <article class="person-card">
+              <div class="person-head">
+                <img src="assets/img/organizers/moscato.jpeg" alt="Vincenzo Moscato">
+                <div>
+                  <h3>Vincenzo Moscato</h3>
+                  <span class="person-role">Full Professor</span>
+                  <span class="person-affiliation">University of Naples Federico II</span>
+                  <div class="person-links">
+                    <a href="mailto:vincenzo.moscato@unina.it" aria-label="Email Vincenzo Moscato"><i class="bi bi-envelope"></i></a>
+                    <a href="https://scholar.google.com/citations?hl=en&user=0FXky6Cr1RoC" aria-label="Google Scholar"><i class="bi bi-mortarboard"></i></a>
+                    <a href="http://wpage.unina.it/vmoscato/" aria-label="Website"><i class="bi bi-globe2"></i></a>
+                  </div>
+                </div>
+              </div>
+              <p class="mb-0">Full Professor of Information Systems, coordinator of the MSc in Data Science, and Director of the CINI ITEM national laboratory.</p>
+            </article>
+          </div>
+          <div class="col-md-6">
+            <article class="person-card">
+              <div class="person-head">
+                <img src="assets/img/organizers/postiglione.png" alt="Marco Postiglione">
+                <div>
+                  <h3>Marco Postiglione</h3>
+                  <span class="person-role">Postdoctoral Research Scholar</span>
+                  <span class="person-affiliation">Northwestern University</span>
+                  <div class="person-links">
+                    <a href="mailto:marco.postiglione@northwestern.edu" aria-label="Email Marco Postiglione"><i class="bi bi-envelope"></i></a>
+                    <a href="https://scholar.google.com/citations?user=_wU3MxUAAAAJ&hl=en" aria-label="Google Scholar"><i class="bi bi-mortarboard"></i></a>
+                    <a href="https://marcopost-it.github.io" aria-label="Website"><i class="bi bi-globe2"></i></a>
+                  </div>
+                </div>
+              </div>
+              <p class="mb-0">His work bridges theoretical advances and deployed, trustworthy AI for social good that serves real users, from fact-checkers and journalists to clinicians and public-safety organizations.</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="section-title mt-5">
+          <span class="eyebrow">Tentative Program Committee</span>
+          <h2>Reviewers</h2>
+        </div>
+        <div class="info-box">
+          <ul class="pc-list">
+            <li>Collin Leiber, Aalto University</li>
+            <li>Federico Cinus, Intesa Sanpaolo AI Center</li>
+            <li>Saurabh Kumar, IIT Hyderabad</li>
+            <li>Salvatore Citraro, ISTI-CNR</li>
+            <li>Ruo-Chun Tzeng, Microsoft</li>
+            <li>Tonmoay Deb, Microsoft</li>
+            <li>Chongyang Gao, Northwestern University</li>
+            <li>Natalia Denisenko, Northwestern University</li>
+            <li>Valerio La Gatta, Northwestern University</li>
+            <li>Lirika Sola, Northwestern University</li>
+            <li>Eliana Pastor, Politecnico di Torino</li>
+            <li>Eleonora Grassucci, Sapienza University of Rome</li>
+            <li>Gizem Gezici, Scuola Normale Superiore</li>
+            <li>Guangyi Zhang, Shenzhen Technology University</li>
+            <li>Sijing Tu, Stanford University</li>
+            <li>Ashwin Rao, USC Information Sciences Institute</li>
+            <li>Francesco Di Serio, University of Naples Federico II</li>
+            <li>Michela Gravina, University of Naples Federico II</li>
+            <li>Mariano Barone, University of Naples Federico II</li>
+            <li>Giuseppe Riccio, University of Naples Federico II</li>
+            <li>Antonio Romano, University of Naples Federico II</li>
+            <li>Simone Piaggesi, University of Pisa</li>
+            <li>Marta Marchiori Manerba, University of Turin</li>
+            <li>Francesco Fabbri, Spotify</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="logo-band" aria-label="Conference and organizer logos">
+      <div class="container-xl">
+        <div class="row g-4 align-items-center">
+          <div class="col-lg-3">
+            <h2>Held With</h2>
+            <div class="logo-row">
+              <a class="logo-item conference" href="https://cikm2026.diag.uniroma1.it/" target="_blank" rel="noopener" aria-label="CIKM 2026">
+                <img src="assets/img/logos/cikm-2026.jpg" alt="CIKM 2026">
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-9">
+            <h2>Organizers' Institutions</h2>
+            <div class="logo-row">
+              <span class="logo-item">
+                <img src="assets/img/logos/sns.png" alt="Scuola Normale Superiore">
+              </span>
+              <span class="logo-item">
+                <img src="assets/img/logos/icar.jpg" alt="ICAR-CNR">
+              </span>
+              <span class="logo-item">
+                <img src="assets/img/logos/unina.png" alt="University of Naples Federico II">
+              </span>
+              <span class="logo-item">
+                <img src="assets/img/logos/northwestern.png" alt="Northwestern University">
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container-xl d-flex flex-column flex-md-row justify-content-between gap-2">
+      <span>GenAI4SG @ CIKM 2026, Rome, Italy.</span>
+      <span><a href="https://cikm2026.diag.uniroma1.it/workshops/" target="_blank" rel="noopener">CIKM Workshops</a> · Contact: <a href="mailto:martino.ciaperoni@sns.it">martino.ciaperoni@sns.it</a></span>
+    </div>
+  </footer>
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>
