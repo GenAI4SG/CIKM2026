@@ -45,6 +45,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center top;
       display: block;
     }
 
@@ -101,6 +102,11 @@
       display: block;
     }
 
+    .speaker-role {
+      font-weight: 600;
+      opacity: .8;
+    }
+
     .speaker-badge {
       display: inline-flex;
       align-items: center;
@@ -137,6 +143,10 @@
     .speaker-detail p {
       margin: 0;
       opacity: .82;
+    }
+
+    .speaker-detail p + p {
+      margin-top: .7rem;
     }
 
     .speaker-note {
@@ -363,16 +373,11 @@
         <div class="section-title">
           <span class="eyebrow">Invited Speaker</span>
           <h2>Donato Pasqualicchio, Microsoft</h2>
-          <p>The talk title, abstract, biography, and photo will be updated here as soon as they are confirmed.</p>
+          <p>The talk title and abstract will be updated here as soon as they are confirmed.</p>
         </div>
         <article class="speaker-feature">
           <div class="speaker-portrait">
-            <!-- Replace this placeholder with:
-                 <img src="assets/img/speakers/pasqualicchio.jpg" alt="Donato Pasqualicchio"> -->
-            <div class="portrait-placeholder" role="img" aria-label="Photo of Donato Pasqualicchio to be added">
-              <i class="bi bi-person-bounding-box" aria-hidden="true"></i>
-              <span>Photo to be added</span>
-            </div>
+            <img src="assets/img/1720437662423.jpeg" alt="Donato Pasqualicchio">
           </div>
           <div class="speaker-body">
             <h3 class="speaker-name">Donato Pasqualicchio</h3>
@@ -380,6 +385,7 @@
               <span class="speaker-affiliation">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/1280px-Microsoft_logo_%282012%29.svg.png" alt="" aria-hidden="true">
               </span>
+              <span class="speaker-role">Azure Solution Specialist</span>
             </div>
             <div class="speaker-detail">
               <span class="speaker-label">Talk title</span>
@@ -391,7 +397,10 @@
             </div>
             <div class="speaker-detail">
               <span class="speaker-label">Biography</span>
-              <p>To be announced. A short biography will be added ahead of the workshop.</p>
+              <p>Donato Pasqualicchio has spent the past 25 years making technology useful and, occasionally, stopping it from making life more complicated. An Azure Solution Specialist at Microsoft and former Senior Cloud Solution Architect, he helps organisations turn ambitious cloud and AI ideas into solutions that work in the real world.</p>
+              <p>He has been working with AI since the days when most people looked at it like cows watching a passing train: puzzled, slightly suspicious, and unsure why it mattered. His experience spans machine learning, NLP, computer vision, conversational systems, and generative AI.</p>
+              <p>Donato was among the contributors who shaped Microsoft&rsquo;s Responsible AI strategy and has spoken at numerous Microsoft events about AI, cloud transformation, governance, and responsible innovation.</p>
+              <p>He believes in &ldquo;productive laziness&rdquo;: automate repetitive work, reuse what works, and save human creativity for problems that genuinely deserve it.</p>
             </div>
             <p class="speaker-note">The invited talk is scheduled for 45 minutes, including Q&amp;A.</p>
           </div>
