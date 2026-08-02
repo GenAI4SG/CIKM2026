@@ -13,9 +13,11 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
   <link href="assets/css/main.css" rel="stylesheet">
 
-  <!-- Invited speaker styles. Move into assets/css/main.css when convenient. -->
+  <!-- Invited speaker, submission tracks, and journal panel styles.
+       Move into assets/css/main.css when convenient. -->
   <style>
-    #speakers {
+    #speakers,
+    #submission {
       --sp-line: rgba(128, 128, 128, .22);
       --sp-soft: rgba(128, 128, 128, .06);
       --sp-line: color-mix(in srgb, currentColor 16%, transparent);
@@ -155,6 +157,144 @@
       opacity: .65;
     }
 
+    /* Submission tracks */
+    .track-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .track-card {
+      border: 1px solid var(--sp-line);
+      border-radius: 16px;
+      padding: 1.6rem;
+      background: var(--sp-soft);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .track-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      align-self: flex-start;
+      padding: .2rem .6rem;
+      border: 1px solid var(--sp-line);
+      border-radius: 999px;
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      opacity: .8;
+      margin-bottom: .85rem;
+    }
+
+    .track-card h3 {
+      margin: 0 0 .5rem;
+      font-size: 1.25rem;
+    }
+
+    .track-card > p {
+      opacity: .85;
+    }
+
+    .track-card ul {
+      list-style: none;
+      padding: 0;
+      margin: .9rem 0 0;
+    }
+
+    .track-card li {
+      position: relative;
+      padding-left: 1.4rem;
+      margin-bottom: .5rem;
+      font-size: .94rem;
+      opacity: .82;
+    }
+
+    .track-card li::before {
+      content: "\F26E";
+      font-family: "bootstrap-icons";
+      position: absolute;
+      left: 0;
+      top: .05rem;
+      font-size: .8rem;
+      opacity: .55;
+    }
+
+    .track-card li:last-child {
+      margin-bottom: 0;
+    }
+
+    .track-rule {
+      border: 1px solid var(--sp-line);
+      border-radius: 14px;
+      padding: 1.1rem 1.3rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      gap: .9rem;
+      align-items: flex-start;
+    }
+
+    .track-rule i {
+      font-size: 1.15rem;
+      opacity: .65;
+      line-height: 1.5;
+    }
+
+    .track-rule p {
+      margin: 0;
+      opacity: .85;
+    }
+
+    /* Planned journal special issue */
+    .journal-panel {
+      margin-top: 3rem;
+      border: 1px solid var(--sp-line);
+      border-radius: 18px;
+      padding: 2rem;
+      background: var(--sp-soft);
+      display: grid;
+      grid-template-columns: 1fr minmax(0, 1.6fr);
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .journal-panel .eyebrow {
+      display: block;
+      margin-bottom: .5rem;
+    }
+
+    .journal-panel h3 {
+      margin: 0 0 .4rem;
+      font-size: clamp(1.35rem, 1.1rem + .9vw, 1.75rem);
+      line-height: 1.2;
+    }
+
+    .journal-venue {
+      font-weight: 600;
+      opacity: .8;
+      margin: 0;
+    }
+
+    .journal-panel p + p {
+      margin-top: .8rem;
+    }
+
+    .journal-status {
+      margin-top: 1.25rem;
+      font-size: .88rem;
+      opacity: .65;
+    }
+
+    @media (max-width: 991.98px) {
+      .journal-panel {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+    }
+
     @media (max-width: 767.98px) {
       .speaker-feature {
         grid-template-columns: 1fr;
@@ -165,6 +305,14 @@
       .speaker-portrait {
         max-width: 210px;
         aspect-ratio: 1 / 1;
+      }
+
+      .track-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .journal-panel {
+        padding: 1.5rem;
       }
     }
   </style>
@@ -178,6 +326,7 @@
           <li><a href="#about">About</a></li>
           <li><a href="#topics">Topics</a></li>
           <li><a href="#submission">Submission</a></li>
+          <li><a href="#special-issue">Special Issue</a></li>
           <li><a href="#program">Program</a></li>
           <li><a href="#speakers">Speaker</a></li>
           <li><a href="#organizers">Organizers</a></li>
@@ -245,7 +394,7 @@
           <div class="date-card">
             <i class="bi bi-file-earmark-check"></i>
             <strong>TBD</strong>
-            <span>Camera-ready papers</span>
+            <span>Camera-ready papers, archival track</span>
           </div>
           <div class="date-card">
             <i class="bi bi-people"></i>
@@ -278,18 +427,52 @@
     </section>
     <section id="submission" class="section">
       <div class="container-xl">
+        <div class="section-title">
+          <span class="eyebrow">Submission</span>
+          <h2>Two submission categories</h2>
+          <p>Authors choose whether their paper is archival or non-archival at submission time. Both categories are reviewed by the same program committee, under the same criteria, and both are presented at the workshop if accepted.</p>
+        </div>
+        <div class="track-grid">
+          <article class="track-card">
+            <span class="track-tag"><i class="bi bi-journal-bookmark" aria-hidden="true"></i> Archival</span>
+            <h3>Published in the proceedings</h3>
+            <p>For authors who want a citable publication of the work as presented.</p>
+            <ul>
+              <li>Included in the workshop proceedings, which shall be submitted to CEUR-WS.org for online publication.</li>
+              <li>Open access under the Creative Commons Attribution 4.0 International license, with authors keeping copyright.</li>
+              <li>Camera-ready papers use the CEURART template and include the required Declaration on Generative AI.</li>
+              <li>The contact author returns a hand-signed author agreement, since scanned pen-on-paper signatures are the only form accepted.</li>
+            </ul>
+          </article>
+          <article class="track-card">
+            <span class="track-tag"><i class="bi bi-mic" aria-hidden="true"></i> Non-archival</span>
+            <h3>Presented, not published</h3>
+            <p>For authors who intend to submit an extended version elsewhere, or who are bound by another venue's dual-submission rules.</p>
+            <ul>
+              <li>Reviewed and presented in the same sessions as archival papers.</li>
+              <li>Not included in the proceedings, so the work remains free for submission to a journal or a major conference.</li>
+              <li>No template or licensing requirements beyond the review format.</li>
+              <li>Listed in the program as a presentation without an accompanying published paper.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="track-rule">
+          <i class="bi bi-info-circle" aria-hidden="true"></i>
+          <p>
+            The category is selected at submission and cannot be changed afterwards. Reviewers are not told which category a paper belongs to, and the preface of the proceedings will report the number of submissions and acceptances in each category.
+          </p>
+        </div>
         <div class="row g-4">
           <div class="col-lg-7">
             <div class="section-title">
-              <span class="eyebrow">Submission</span>
               <h2>Guidelines</h2>
             </div>
             <div class="info-box">
               <p>
-                Submissions will be handled electronically through EasyChair. Papers should follow the ACM two-column format.
+                Submissions are handled electronically through EasyChair and are reviewed in the ACM two-column format. Accepted archival papers are then reformatted into the single-column CEURART template for the camera-ready version.
               </p>
               <p>
-                We plan to accept full papers presenting mature technical or empirical contributions; short papers and position papers presenting preliminary results or research agendas; and dataset, benchmark, and demo papers presenting reusable resources or systems.
+                Full papers are 8 to 12 pages and present mature technical or empirical contributions. Short papers and position papers are 4 to 6 pages and present preliminary results or research agendas. Dataset, benchmark, and demo papers presenting reusable resources or systems may use either length. References do not count towards the page limits.
               </p>
               <p>
                 Each submission will receive at least two reviews. Evaluation criteria include relevance to the workshop, technical quality, novelty, clarity, methodological soundness, potential societal benefit, and awareness of risks for vulnerable or underserved populations.
@@ -304,13 +487,35 @@
             <div class="callout h-100">
               <h3>Important Notes</h3>
               <p>
-                Workshop papers will not be included in the ACM proceedings by default. Archival publication options and opt-in proceedings details will be announced in accordance with CIKM policies.
+                Workshop papers are not included in the ACM CIKM proceedings. Proceedings shall be submitted to CEUR-WS.org for online publication, and acceptance of the volume is at the discretion of the CEUR-WS team.
+              </p>
+              <p>
+                Papers already published elsewhere cannot be included in the volume. Authors of archival papers keep the right to post the published version on their homepage or institutional repository.
               </p>
               <p>
                 All deadlines are 11:59 PM Anywhere on Earth unless stated otherwise.
               </p>
-              <a class="btn-main" href="https://www.acm.org/publications/proceedings-template" target="_blank" rel="noopener"><i class="bi bi-filetype-tex"></i> ACM Template</a>
+              <a class="btn-main" href="https://www.acm.org/publications/proceedings-template" target="_blank" rel="noopener"><i class="bi bi-filetype-tex"></i> ACM Template, For Review</a>
+              <a class="btn-ghost mt-2" href="https://www.overleaf.com/latex/templates/template-for-submissions-to-ceur-workshop-proceedings-ceur-ws-dot-org/wqyfdgftmcfw" target="_blank" rel="noopener"><i class="bi bi-filetype-tex"></i> CEURART, For Camera-Ready</a>
             </div>
+          </div>
+        </div>
+        <div class="journal-panel" id="special-issue">
+          <div>
+            <span class="eyebrow">Planned Special Issue</span>
+            <h3>Generative AI for Vulnerable and Underserved Populations</h3>
+            <p class="journal-venue">Information Processing &amp; Management, Elsevier</p>
+          </div>
+          <div>
+            <p>
+              A special issue on this theme is in preparation with <em>Information Processing &amp; Management</em>, covering grounding, evaluation, and deployment for populations that have no easy way to verify the information a generative system gives them. Topics include retrieval-augmented generation over thin or contested evidence bases, knowledge base construction and maintenance, verification and information integrity, evaluation protocols that measure deployment risk rather than benchmark performance, and efficient deployment under real resource constraints.
+            </p>
+            <p>
+              The call will be an open one, not a proceedings volume, and the majority of submissions are expected to come from outside the workshop. Authors of accepted workshop papers, in either category, will be invited to submit substantially extended versions. All submissions go through the journal's standard peer review, and an invitation carries no guarantee of acceptance.
+            </p>
+            <p class="journal-status">
+              The full call for papers, including scope, deadlines, and guest editors, will be published here once the special issue is formally established with the journal.
+            </p>
           </div>
         </div>
       </div>
@@ -320,7 +525,7 @@
         <div class="section-title">
           <span class="eyebrow">Program</span>
           <h2>Tentative half-day schedule</h2>
-          <p>Final times, accepted papers, and invited speakers will be announced after the submission and review process.</p>
+          <p>Final times and accepted papers will be announced after the submission and review process. The published program will indicate which presentations correspond to papers included in the proceedings and which do not.</p>
         </div>
         <div class="program-list">
           <div class="program-item">
