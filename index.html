@@ -17,7 +17,8 @@
        Move into assets/css/main.css when convenient. -->
   <style>
     #speakers,
-    #submission {
+    #submission,
+    #program {
       --sp-line: rgba(128, 128, 128, .22);
       --sp-soft: rgba(128, 128, 128, .06);
       --sp-line: color-mix(in srgb, currentColor 16%, transparent);
@@ -328,6 +329,391 @@
         padding: 1.5rem;
       }
     }
+
+    /* Program (interactive agenda) */
+    #program {
+      --pg-accent: currentColor; /* set to the site accent color if desired */
+      --pg-live: #16a34a;
+    }
+
+    .pg-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .pg-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+
+    .pg-stats span {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .3rem .75rem;
+      border: 1px solid var(--sp-line);
+      border-radius: 999px;
+      font-size: .82rem;
+      font-weight: 600;
+      opacity: .85;
+    }
+
+    .pg-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .45rem .95rem;
+      border: 1px solid var(--sp-line);
+      border-radius: 999px;
+      background: transparent;
+      color: inherit;
+      font: inherit;
+      font-size: .86rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color .15s ease;
+    }
+
+    .pg-toggle:hover,
+    .pg-toggle:focus-visible {
+      background: var(--sp-soft);
+    }
+
+    .pg-agenda {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .pg-slot {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 1.5rem;
+      padding: 1.4rem 0;
+      border-top: 1px solid var(--sp-line);
+      position: relative;
+    }
+
+    .pg-slot:last-child {
+      border-bottom: 1px solid var(--sp-line);
+    }
+
+    .pg-time {
+      display: flex;
+      flex-direction: column;
+      gap: .15rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .pg-time time {
+      font-weight: 700;
+      font-size: 1.02rem;
+    }
+
+    .pg-dur {
+      font-size: .78rem;
+      opacity: .6;
+    }
+
+    .pg-body h3 {
+      margin: 0 0 .3rem;
+      font-size: 1.12rem;
+      line-height: 1.3;
+    }
+
+    .pg-body h3 i {
+      opacity: .6;
+      margin-right: .2rem;
+    }
+
+    .pg-body h3 a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid var(--sp-line);
+    }
+
+    .pg-body h3 a:hover {
+      border-bottom-color: currentColor;
+    }
+
+    .pg-body p {
+      margin: 0;
+      opacity: .78;
+    }
+
+    .pg-break .pg-body h3,
+    .pg-break .pg-time {
+      opacity: .75;
+    }
+
+    .pg-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .18rem .6rem;
+      border: 1px solid var(--sp-line);
+      border-radius: 999px;
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--pg-accent);
+      margin-bottom: .7rem;
+    }
+
+    .pg-keynote .pg-body h3 {
+      font-size: 1.3rem;
+    }
+
+    .pg-keynote .pg-sub {
+      font-weight: 500;
+      margin-bottom: .55rem;
+    }
+
+    .pg-keynote .pg-speaker {
+      opacity: .9;
+    }
+
+    .pg-session {
+      border: 1px solid var(--sp-line);
+      border-radius: 18px;
+      background: var(--sp-soft);
+      overflow: hidden;
+    }
+
+    .pg-session-head {
+      padding: 1.5rem 1.6rem 1.25rem;
+      border-bottom: 1px solid var(--sp-line);
+    }
+
+    .pg-session-head h3 {
+      margin: 0 0 .45rem;
+      font-size: clamp(1.25rem, 1.05rem + .6vw, 1.5rem);
+      line-height: 1.25;
+    }
+
+    .pg-session-head p {
+      margin: 0;
+      opacity: .78;
+      max-width: 62rem;
+    }
+
+    .pg-papers {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .pg-paper {
+      display: grid;
+      grid-template-columns: 78px 1fr;
+      gap: 1rem;
+      padding: 1rem 1.6rem;
+      position: relative;
+    }
+
+    .pg-paper + .pg-paper {
+      border-top: 1px solid var(--sp-line);
+    }
+
+    .pg-ptime {
+      font-variant-numeric: tabular-nums;
+      font-size: .88rem;
+      font-weight: 600;
+      opacity: .7;
+      padding-top: .1rem;
+    }
+
+    .pg-paper details > summary {
+      list-style: none;
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      column-gap: 1rem;
+      row-gap: .2rem;
+      border-radius: 8px;
+      outline-offset: 4px;
+    }
+
+    .pg-paper details > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .pg-ptitle {
+      grid-column: 1;
+      font-weight: 650;
+      line-height: 1.35;
+      display: block;
+    }
+
+    .pg-paper summary:hover .pg-ptitle {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    .pg-authors {
+      grid-column: 1;
+      display: block;
+      font-size: .88rem;
+      opacity: .7;
+    }
+
+    .pg-more {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      display: inline-flex;
+      align-items: flex-start;
+      gap: .5rem;
+      font-size: .76rem;
+      font-weight: 600;
+      white-space: nowrap;
+      padding-top: .15rem;
+    }
+
+    .pg-hint {
+      opacity: .55;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+
+    .pg-more i {
+      transition: transform .2s ease;
+      opacity: .6;
+    }
+
+    .pg-paper details[open] .pg-more i {
+      transform: rotate(180deg);
+    }
+
+    .pg-badge {
+      padding: .05rem .5rem;
+      border: 1px solid var(--sp-line);
+      border-radius: 999px;
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      opacity: .85;
+    }
+
+    .pg-abstract {
+      margin-top: .9rem;
+      padding-left: 1rem;
+      border-left: 2px solid var(--sp-line);
+      font-size: .93rem;
+    }
+
+    .pg-abstract p {
+      margin: 0 0 .75rem;
+      opacity: .85;
+      line-height: 1.6;
+    }
+
+    .pg-abstract .pg-affil {
+      font-size: .84rem;
+      font-weight: 600;
+      opacity: .7;
+    }
+
+    .pg-kw {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .pg-kw li {
+      padding: .12rem .55rem;
+      border-radius: 999px;
+      background: var(--sp-soft);
+      border: 1px solid var(--sp-line);
+      font-size: .74rem;
+      opacity: .8;
+    }
+
+    .pg-panel .pg-ptitle i {
+      opacity: .6;
+      margin-right: .2rem;
+    }
+
+    .pg-paper:target {
+      background: var(--sp-soft);
+    }
+
+    /* Live indicator, shown only on the workshop day */
+    .is-live {
+      box-shadow: inset 3px 0 0 var(--pg-live);
+    }
+
+    .pg-slot.is-live {
+      box-shadow: none;
+    }
+
+    .pg-slot.is-live > .pg-time::after,
+    .pg-paper.is-live > .pg-ptime::after {
+      content: "Now";
+      display: inline-flex;
+      align-self: flex-start;
+      margin-top: .35rem;
+      padding: .05rem .5rem;
+      border-radius: 999px;
+      background: var(--pg-live);
+      color: #fff;
+      font-size: .68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .pg-paper.is-live > .pg-ptime {
+      display: flex;
+      flex-direction: column;
+      opacity: 1;
+    }
+
+    .pg-done {
+      opacity: .55;
+    }
+
+    @media (max-width: 767.98px) {
+      .pg-slot {
+        grid-template-columns: 1fr;
+        gap: .6rem;
+      }
+
+      .pg-time {
+        flex-direction: row;
+        align-items: baseline;
+        gap: .6rem;
+      }
+
+      .pg-paper {
+        grid-template-columns: 1fr;
+        gap: .25rem;
+        padding: 1rem 1.2rem;
+      }
+
+      .pg-session-head {
+        padding: 1.25rem 1.2rem 1rem;
+      }
+
+      .pg-paper details > summary {
+        grid-template-columns: 1fr;
+      }
+
+      .pg-more {
+        grid-column: 1;
+        grid-row: auto;
+        margin-top: .3rem;
+      }
+    }
   </style>
 </head>
 <body>
@@ -358,10 +744,10 @@
         <div class="event-facts" aria-label="Event details">
           <span class="event-pill"><i class="bi bi-calendar-event"></i> November 8, 2026</span>
           <span class="event-pill"><i class="bi bi-geo-alt"></i> Rome, Italy</span>
-          <span class="event-pill"><i class="bi bi-clock-history"></i> Half-day workshop</span>
+          <span class="event-pill"><i class="bi bi-clock-history"></i> 2:00 &ndash; 6:10 PM</span>
         </div>
         <div class="hero-actions">
-          <a class="btn-main" href="https://easychair.org/conferences/?conf=genai4sgcikm2026" target="_blank" rel="noopener"><i class="bi bi-upload"></i> Submit Paper</a>
+          <a class="btn-main" href="#program"><i class="bi bi-calendar3"></i> View Program</a>
           <a class="btn-ghost" href="https://cikm2026.diag.uniroma1.it/" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> CIKM 2026</a>
         </div>
       </div>
@@ -537,53 +923,217 @@
       <div class="container-xl">
         <div class="section-title">
           <span class="eyebrow">Program</span>
-          <h2>Tentative half-day schedule</h2>
-          <p>Final times and accepted papers will be announced after the submission and review process. The published program will indicate which presentations correspond to papers included in the proceedings and which do not.</p>
+          <h2>Sunday, November 8, 2:00 &ndash; 6:10 PM</h2>
+          <p>One invited talk and ten accepted papers in two topical sessions. Talks run back-to-back (10 minutes plus changeover), and questions are collected into a moderated panel with all session presenters seated together. All accepted papers appear in the CEUR-WS workshop proceedings. All times are local Rome time (CET). Click a paper title to read its abstract.</p>
         </div>
-        <div class="program-list">
-          <div class="program-item">
-            <div class="program-time">5 min</div>
-            <div>
-              <h3>Opening</h3>
-              <p class="mb-0">Workshop motivation and overview.</p>
-            </div>
+        <div class="pg-toolbar">
+          <div class="pg-stats" aria-label="Program at a glance">
+            <span><i class="bi bi-mic" aria-hidden="true"></i> 1 invited talk</span>
+            <span><i class="bi bi-file-earmark-text" aria-hidden="true"></i> 10 papers</span>
+            <span><i class="bi bi-collection" aria-hidden="true"></i> 2 sessions</span>
+            <span><i class="bi bi-people" aria-hidden="true"></i> 2 panels</span>
           </div>
-          <div class="program-item">
-            <div class="program-time">45 min</div>
-            <div>
-              <h3>Invited Talk: Inclusive by Design, Responsible by Evidence</h3>
-              <p class="mb-0">Evaluating and governing generative AI beyond average performance. Given by Donato Pasqualicchio (Microsoft).</p>
-            </div>
-          </div>
-          <div class="program-item">
-            <div class="program-time">40 min</div>
-            <div>
-              <h3>Paper Session I</h3>
-              <p class="mb-0">Methods and systems, including RAG, knowledge grounding, multimodal models, agents, synthetic data, and efficient deployment, followed by joint panel Q&amp;A.</p>
-            </div>
-          </div>
-          <div class="program-item">
-            <div class="program-time">30 min</div>
-            <div>
-              <h3>Coffee Break and Interaction</h3>
-              <p class="mb-0">Informal discussion, posters, and demo interaction.</p>
-            </div>
-          </div>
-          <div class="program-item">
-            <div class="program-time">40 min</div>
-            <div>
-              <h3>Paper Session II</h3>
-              <p class="mb-0">Applications, evaluation, and deployment in health, education, accessibility, crisis response, sustainability, and information integrity, followed by joint panel Q&amp;A.</p>
-            </div>
-          </div>
-          <div class="program-item">
-            <div class="program-time">20 min</div>
-            <div>
-              <h3>Open Discussion and Closing</h3>
-              <p class="mb-0">Open challenges for GenAI systems serving vulnerable and underserved populations.</p>
-            </div>
-          </div>
+          <button type="button" class="pg-toggle" id="pg-toggle-all" aria-pressed="false"><i class="bi bi-arrows-expand" aria-hidden="true"></i> <span>Expand all abstracts</span></button>
         </div>
+        <ol class="pg-agenda">
+          <li class="pg-slot" data-start="2026-11-08T14:00:00+01:00" data-end="2026-11-08T14:10:00+01:00">
+            <div class="pg-time"><time datetime="2026-11-08T14:00:00+01:00">2:00 PM</time><span class="pg-dur">10 min</span></div>
+            <div class="pg-body">
+              <h3><i class="bi bi-door-open" aria-hidden="true"></i> Welcome and Opening</h3>
+              <p>Workshop motivation, overview of the program, and logistics.</p>
+            </div>
+          </li>
+          <li class="pg-slot pg-keynote" data-start="2026-11-08T14:10:00+01:00" data-end="2026-11-08T14:55:00+01:00">
+            <div class="pg-time"><time datetime="2026-11-08T14:10:00+01:00">2:10 PM</time><span class="pg-dur">45 min</span></div>
+            <div class="pg-body">
+              <span class="pg-tag"><i class="bi bi-stars" aria-hidden="true"></i> Invited talk</span>
+              <h3><a href="#speakers">Inclusive by Design, Responsible by Evidence</a></h3>
+              <p class="pg-sub">Evaluating and Governing Generative AI Beyond Average Performance</p>
+              <p class="pg-speaker"><strong>Donato Pasqualicchio</strong>, Microsoft</p>
+            </div>
+          </li>
+          <li class="pg-slot pg-session-slot" id="session-i" data-start="2026-11-08T14:55:00+01:00" data-end="2026-11-08T16:10:00+01:00">
+            <div class="pg-time"><time datetime="2026-11-08T14:55:00+01:00">2:55 PM</time><span class="pg-dur">75 min</span></div>
+            <div class="pg-session">
+              <header class="pg-session-head">
+                <span class="pg-tag">Paper Session I &middot; 2:55 PM &ndash; 4:10 PM</span>
+                <h3>Faithful Generation: Facts, Bias, and Evidence</h3>
+                <p>Do generative systems stay faithful to what matters? Evidence placement in retrieval-augmented fact-checking, tone-induced sycophancy, inference-time debiasing, and whether synthetic data preserves the scientific evidence of the cohorts it augments.</p>
+              </header>
+              <ol class="pg-papers">
+                <li class="pg-paper" id="paper-1" data-start="2026-11-08T14:55:00+01:00" data-end="2026-11-08T15:07:00+01:00">
+                  <time class="pg-ptime" datetime="2026-11-08T14:55:00+01:00">2:55 PM</time>
+                  <details>
+                    <summary>
+                      <span class="pg-ptitle">Context Shapes LLMs Retrieval-Augmented Fact-Checking Effectiveness</span>
+                      <span class="pg-authors">Pietro Bernardelle, Stefano Civelli, Kevin Roitero and Gianluca Demartini</span>
+                      <span class="pg-more"><span class="pg-badge">Short paper</span><span class="pg-hint">Abstract</span><i class="bi bi-chevron-down" aria-hidden="true"></i></span>
+                    </summary>
+                    <div class="pg-abstract">
+                      <p class="pg-affil"><i class="bi bi-building" aria-hidden="true"></i> The University of Queensland; University of Udine</p>
+                      <p>Large language models (LLMs) show strong reasoning abilities across diverse tasks, yet their performance on extended contexts remains inconsistent. While prior research has emphasized mid-context degradation in question answering, this study examines how context affects LLM-based fact verification. Using three datasets (HOVER, FEVEROUS, and ClimateFEVER) and five open-source models across different parameter sizes (7-8B, 32B, and 70B parameters) and model families (Llama-3.1, Qwen2.5, and Qwen3), we evaluate both parametric factual knowledge and the impact of evidence placement across varying context lengths. We find that LLMs exhibit non-trivial parametric knowledge of factual claims and that their verification accuracy generally declines as context length increases. Similar to what has been shown in previous works, in-context evidence placement plays a critical role, with accuracy being consistently higher when relevant evidence appears near the beginning or end of the prompt and lower when placed mid-context. These results underscore the importance of prompt structure in retrieval-augmented fact-checking systems.</p>
+                      <ul class="pg-kw" aria-label="Keywords"><li>Large language models</li><li>evidence ranking</li><li>claim verification</li><li>position bias</li></ul>
+                    </div>
+                  </details>
+                </li>
+                <li class="pg-paper" id="paper-13" data-start="2026-11-08T15:07:00+01:00" data-end="2026-11-08T15:19:00+01:00">
+                  <time class="pg-ptime" datetime="2026-11-08T15:07:00+01:00">3:07 PM</time>
+                  <details>
+                    <summary>
+                      <span class="pg-ptitle">Can You Please Be Wrong? How User and System Tone Shape Sycophancy and Factual Errors in Small-Scale LLMs</span>
+                      <span class="pg-authors">Chandana Sree Mala, Simon Gottschalk, Gizem Gezici, Wolfgang Nejdl and Fosca Giannotti</span>
+                      <span class="pg-more"><span class="pg-hint">Abstract</span><i class="bi bi-chevron-down" aria-hidden="true"></i></span>
+                    </summary>
+                    <div class="pg-abstract">
+                      <p class="pg-affil"><i class="bi bi-building" aria-hidden="true"></i> University of Pisa; L3S Research Center, Leibniz Universität Hannover; Scuola Normale Superiore</p>
+                      <p>LLMs are powerful models yet exhibit systematic behavioural failures. Nonetheless, the effect of user- and system-tone in inducing or mitigating factual errors including sycophantic agreement in response to user beliefs remains largely underexplored. We investigate how user beliefs and the tone expressed through user prompts or system instructions affect model behaviour in human–LLM conversations. Using 250 questions from TruthfulQA and two small-scale LLMs as Gemma and Qwen, we construct user-tone and system-tone conditioning prompt variants to examine the effect of tone while systematically manipulating the correctness of the user’s belief. In this way, we evaluate how tone and user-belief correctness jointly affect sycophancy and other factuality errors, and how tone shapes response style in the evaluated models. Overall, in terms of factuality errors, Gemma is more tone-sensitive, whereas Qwen remains consistently sycophantic regardless of tone. In terms of response style, Gemma reacts differently to user- and system-tone variations, while Qwen produces predominantly polite responses across all user- and system-tone conditions.</p>
+                      <ul class="pg-kw" aria-label="Keywords"><li>LLMs</li><li>Sycophancy</li><li>Hallucination</li><li>Politeness</li></ul>
+                    </div>
+                  </details>
+                </li>
+                <li class="pg-paper" id="paper-11" data-start="2026-11-08T15:19:00+01:00" data-end="2026-11-08T15:31:00+01:00">
+                  <time class="pg-ptime" datetime="2026-11-08T15:19:00+01:00">3:19 PM</time>
+                  <details>
+                    <summary>
+                      <span class="pg-ptitle">Nonviolent Communication (NVC) as a Debiasing Strategy for Navigating the Bias–Utility Trade-off in Conversational AI</span>
+                      <span class="pg-authors">Venkata Satya Satvik Viriyala, Kartikeya Dimri, Ketaki Tamhanakar, Neha Tamhanakar and Vinu Ellampallil Venugopal</span>
+                      <span class="pg-more"><span class="pg-hint">Abstract</span><i class="bi bi-chevron-down" aria-hidden="true"></i></span>
+                    </summary>
+                    <div class="pg-abstract">
+                      <p class="pg-affil"><i class="bi bi-building" aria-hidden="true"></i> IIIT Bangalore</p>
+                      <p>Safety alignment in conversational AI typically mitigates harmful outputs through refusal-based strategies, but at the cost of reduced utility. We investigate whether social bias can instead be mitigated through structured reasoning at inference time. We propose a Nonviolent Communication (NVC)-based reasoning prompt that decomposes user inputs into Observations, Feelings, Needs, and Requests (OFNR). We motivate this design with a hypothesised semantic bottleneck: the Need component may project identity-laden features into a group-neutral space of universal human motivations. Our experiments test the behavioural consequences of the prompt rather than this mechanism directly. We evaluate the prompt across six model configurations spanning three model families (Phi-4 Mini 3.8B, Llama 3.1 8B, Gemma 3 27B) and two alignment states (instruction-aligned and safety-weakened abliterated variants). Using a controlled five-arm prompt study generating 82,500 responses and complementary open-ended evaluations over 5,616 queries, we measure structured answerability and stereotype direction (BBQ), conversational lexical bias (BiasAsker), utility rated by LLM judges, and behavioural quality (TruLens). NVC significantly reduces lexical bias flags across all configurations (Holm-adjusted p &lt; 0.001; reductions of 11–42 percentage points), including abliterated models whose safety mechanisms were deliberately weakened. This reduction is accompanied by a conditional answerability trade-off: NVC improves accuracy on ambiguous queries by appropriately withholding answers, but reduces disambiguated accuracy by 3–24 percentage points relative to matched reasoning controls. Of 1,519 newly incorrect answers against the four-step control, 1,352 (89%) are explicit Unknown responses: the model withholds supported answers rather than selecting incorrect groups. The largest losses fall on socioeconomic status, physical appearance, and sexual orientation. Prompt-level semantic reasoning thus offers a lightweight, model-agnostic lever for bias mitigation that persists in safety-weakened models, with answerability costs that practitioners must weigh in each deployment.</p>
+                      <ul class="pg-kw" aria-label="Keywords"><li>Large Language Models</li><li>Social Bias Mitigation</li><li>Nonviolent Communication</li><li>Inference-Time Alignment</li><li>Structured Reasoning</li><li>Bias–Utility Trade-off</li><li>Safety-Weakened (Abliterated) Models</li></ul>
+                    </div>
+                  </details>
+                </li>
+                <li class="pg-paper" id="paper-8" data-start="2026-11-08T15:31:00+01:00" data-end="2026-11-08T15:43:00+01:00">
+                  <time class="pg-ptime" datetime="2026-11-08T15:31:00+01:00">3:31 PM</time>
+                  <details>
+                    <summary>
+                      <span class="pg-ptitle">Beyond Predictive Similarity: StableSynth for Resampling-Aware Evidence Preservation in Synthetic Biomedical Data</span>
+                      <span class="pg-authors">Adam Kiersztyn, Krystyna Kiersztyn, Mateusz Turowicz, Jakub Chromiak, Ryszard Sitarz, Kaja Karakuła, Robert Karpiński, Anna Rymuszka, Dariusz Juchnowicz, Anna Machrowska, Joanna Róg and Hanna Karakuła-Juchnowicz</span>
+                      <span class="pg-more"><span class="pg-hint">Abstract</span><i class="bi bi-chevron-down" aria-hidden="true"></i></span>
+                    </summary>
+                    <div class="pg-abstract">
+                      <p class="pg-affil"><i class="bi bi-building" aria-hidden="true"></i> Lublin University of Technology; Medical University of Lublin; The John Paul II Catholic University of Lublin</p>
+                      <p>Synthetic augmentation is attractive in small biomedical cohorts in which metabolic and inflammatory measurements are correlated and prediction models may be used to prioritize follow-up variables. Conventional synthetic-data evaluation examines distributional fidelity, predictive utility, and privacy, but does not directly test whether the same model-selected variables recur after augmentation. We introduce StableSynth, a paired-resampling audit separating predictive behavior from the preservation and stability of model-derived feature sets. On 113 quality-controlled subjects and 79 biochemical variables, we compared six classical augmentation controls and a conditional variational autoencoder (CVAE) over 25 matched train–test folds. Gaussian Copula achieved mean AUC 0.882, equal to real-only training, while Top-15 Evidence Preservation Score (EPS) was 0.477 and selection stability decreased from 0.544 to 0.406. Increasing CVAE augmentation from 0.5× to 2× reduced EPS from 0.591 to 0.346. A new threshold-sensitivity analysis (k = 5, 10, 15, 20, 25) recovers similar evidence-set divergence; all-feature rank correlations and normalized-importance distances further show that identity overlap does not fully capture importance changes. Random-Forest and full-cohort analyses support the qualitative pattern. These observations demonstrate that apparently preserved discrimination may coexist with a different and less recurrent model-selected feature set; they do not establish the validity or invalidity of specific clinical biomarkers.</p>
+                      <ul class="pg-kw" aria-label="Keywords"><li>synthetic biomedical data</li><li>model-derived evidence</li><li>resampling stability</li><li>synthetic augmentation</li><li>reproducibility</li><li>trustworthy AI</li></ul>
+                    </div>
+                  </details>
+                </li>
+                <li class="pg-paper" id="paper-9" data-start="2026-11-08T15:43:00+01:00" data-end="2026-11-08T15:55:00+01:00">
+                  <time class="pg-ptime" datetime="2026-11-08T15:43:00+01:00">3:43 PM</time>
+                  <details>
+                    <summary>
+                      <span class="pg-ptitle">AMR-Synth: Preserving Rare Resistance Architectures under Generative Augmentation in One-Health Surveillance</span>
+                      <span class="pg-authors">Adam Kiersztyn, Krystyna Kiersztyn, Mateusz Turowicz, Jakub Chromiak, Kinga Ożga-Wybranowska, Ilona Sadok, Daniel Klich, Marta Gałązka and Rafał Łopucki</span>
+                      <span class="pg-more"><span class="pg-hint">Abstract</span><i class="bi bi-chevron-down" aria-hidden="true"></i></span>
+                    </summary>
+                    <div class="pg-abstract">
+                      <p class="pg-affil"><i class="bi bi-building" aria-hidden="true"></i> Lublin University of Technology; The John Paul II Catholic University of Lublin; Warsaw University of Life Sciences; Maria Curie-Skłodowska University</p>
+                      <p>A larger synthetic surveillance table need not retain the long-tailed biological evidence of the original observations. We examine that distinction in ten-drug phenotypic antimicrobial resistance profiles obtained from 157 independent wild-bird admissions, representing 220 Escherichia coli isolates and 36 bird species. Forty-nine complete resistance patterns were observed, including 42 infrequent resistant patterns (frequency at most two). We evaluate group-aware rarity-aware latent resampling (G-RALR) using the Rare Resistance Preservation Score (RRPS), which combines coverage of real rare patterns, calibration of their probability mass, and preservation of pairwise co-resistance. Because the historical source code and per-run results were unavailable, we report an explicitly independent reconstruction using a fully specified conditional variational autoencoder and deposited analysis scripts. Across 200 generated cohorts per setting, RRPS increased from 0.726 without rarity emphasis to 0.784 and 0.793 with moderate rare-donor probabilities of 0.1 and 0.2; more aggressive emphasis reduced RRPS to 0.761. Ecological donor matching improved RRPS from 0.749 to 0.793 at probability 0.2. In held-out real-bird evaluation, rMDR ROC AUC was 0.713 using real training data alone, compared with 0.693, 0.685, and 0.676 after one-, three-, and five-times matched synthetic augmentation. Alternative RRPS weights changed the preference between moderate operating points. The findings support a preservation–utility–dose assessment: rare-profile recovery, predictive utility, and synthetic volume must be evaluated separately. These results are conditional on one reconstructed implementation, one observational cohort, and repeated rather than externally independent held-out partitions.</p>
+                      <ul class="pg-kw" aria-label="Keywords"><li>synthetic tabular data</li><li>antimicrobial resistance</li><li>One Health</li><li>rare patterns</li><li>conditional variational autoencoder</li><li>wildlife surveillance</li><li>preservation</li><li>leakage-safe validation</li></ul>
+                    </div>
+                  </details>
+                </li>
+                <li class="pg-paper pg-panel" data-start="2026-11-08T15:55:00+01:00" data-end="2026-11-08T16:10:00+01:00">
+                  <time class="pg-ptime" datetime="2026-11-08T15:55:00+01:00">3:55 PM</time>
+                  <div><span class="pg-ptitle"><i class="bi bi-people" aria-hidden="true"></i> Joint panel Q&amp;A</span><span class="pg-authors">All Session I presenters, moderated by the organizers.</span></div>
+                </li>
+              </ol>
+            </div>
+          </li>
+          <li class="pg-slot pg-break" data-start="2026-11-08T16:10:00+01:00" data-end="2026-11-08T16:40:00+01:00">
+            <div class="pg-time"><time datetime="2026-11-08T16:10:00+01:00">4:10 PM</time><span class="pg-dur">30 min</span></div>
+            <div class="pg-body">
+              <h3><i class="bi bi-cup-hot" aria-hidden="true"></i> Coffee Break and Interaction</h3>
+              <p>Informal discussion with presenters and attendees.</p>
+            </div>
+          </li>
+          <li class="pg-slot pg-session-slot" id="session-ii" data-start="2026-11-08T16:40:00+01:00" data-end="2026-11-08T17:40:00+01:00">
+            <div class="pg-time"><time datetime="2026-11-08T16:40:00+01:00">4:40 PM</time><span class="pg-dur">60 min</span></div>
+            <div class="pg-session">
+              <header class="pg-session-head">
+                <span class="pg-tag">Paper Session II &middot; 4:40 PM &ndash; 5:40 PM</span>
+                <h3>Frugal AI for Under-Resourced Settings</h3>
+                <p>Building and deploying under real constraints: minority languages with scarce annotated data, on-premise clinical pipelines on consumer GPUs, and low-cost camera-based monitoring of safety-critical infrastructure.</p>
+              </header>
+              <ol class="pg-papers">
+                <li class="pg-paper" id="paper-6" data-start="2026-11-08T16:40:00+01:00" data-end="2026-11-08T16:52:00+01:00">
+                  <time class="pg-ptime" datetime="2026-11-08T16:40:00+01:00">4:40 PM</time>
+                  <details>
+                    <summary>
+                      <span class="pg-ptitle">Benchmarking Pretrained Encoders for POS Tagging in Minority Languages</span>
+                      <span class="pg-authors">Salvatore Carta, Filippo Concas, Alessandro Giuliani, Marco Manolo Manca and Mirko Marras</span>
+                      <span class="pg-more"><span class="pg-hint">Abstract</span><i class="bi bi-chevron-down" aria-hidden="true"></i></span>
+                    </summary>
+                    <div class="pg-abstract">
+                      <p class="pg-affil"><i class="bi bi-building" aria-hidden="true"></i> University of Cagliari; VisioScientiae S.r.l.</p>
+                      <p>In low-resource, underserved language settings, developing and evaluating generative artificial intelligence systems is challenging because annotated data and dedicated linguistic resources and tools are usually scarce. To this end, we present a benchmarking study on Sardinian and its varieties, aiming to extend the analysis to additional low-resource languages. In particular, we evaluate several pretrained Transformer-based encoders for Part-of-Speech (POS) tagging by jointly considering predictive effectiveness and inference efficiency, and we investigate cross-variety generalization among three Sardinian varieties: Campidanese, Nuorese, and Arborense. To assess whether the observed patterns extend beyond Sardinian, we apply the same experimental protocol to three additional minority languages: Khasi, Bhojpuri, and Igbo. Although the evaluated architectures behave differently across datasets, our results reveal a consistent trade-off between predictive performance and computational efficiency. The cross-variety experiments further show that performance can differ substantially depending on the training and evaluation variety. We deem that reliable POS tagging may provide an intermediate linguistic layer for developing and evaluating generative systems in low-resource settings. In particular, such analyses can help estimate whether generated texts reveal likely morphosyntactic patterns, identify errors involving grammatical categories such as determiners, pronouns, or verb forms, and compare the grammatical structure of generated and authentic texts. Our findings may therefore provide practical recommendations for selecting POS tagging models under different computational constraints and evaluation resources for future generative systems.</p>
+                      <ul class="pg-kw" aria-label="Keywords"><li>Low-Resource Languages</li><li>NLP</li><li>POS Tagging</li><li>Benchmarking</li></ul>
+                    </div>
+                  </details>
+                </li>
+                <li class="pg-paper" id="paper-10" data-start="2026-11-08T16:52:00+01:00" data-end="2026-11-08T17:04:00+01:00">
+                  <time class="pg-ptime" datetime="2026-11-08T16:52:00+01:00">4:52 PM</time>
+                  <details>
+                    <summary>
+                      <span class="pg-ptitle">A Context-Aware Neural Spell Checker for Campidanese Sardinian in Low-Resource Settings</span>
+                      <span class="pg-authors">Salvatore Mario Carta, Filippo Concas, Alessandro Giuliani, Marco Manolo Manca, Mirko Marras and Alessandro Sebastian Podda</span>
+                      <span class="pg-more"><span class="pg-hint">Abstract</span><i class="bi bi-chevron-down" aria-hidden="true"></i></span>
+                    </summary>
+                    <div class="pg-abstract">
+                      <p class="pg-affil"><i class="bi bi-building" aria-hidden="true"></i> University of Cagliari</p>
+                      <p>Sardinian is the largest minority language in Italy and is classified as definitely endangered, yet speakers writing in it have limited context-aware support. This paper presents a prototype context-aware spell checker for Campidanese Sardinian. An Italian BERT encoder, adapted through continued pre-training, flags anomalies and ranks candidates generated algorithmically from a validated lexicon, so no form outside that lexicon can appear in the output. In the absence of parallel data, training pairs are synthesized using confusion sets derived from the Official Graphemic Repertory of the Sardinian Language. On a held-out test set of 160 sentences with synthetic errors, the system reaches an F0.5 of 0.7477, on par with the best of ten fine-tuned generative baselines from 1B to 9B parameters, and the highest precision of the comparison, while running two orders of magnitude faster, at 20.88 ms per sentence on consumer hardware. A non-harmfulness criterion is further adopted, asking whether a system leaves text better or worse than it found it: two of twelve systems fail it, including those whose interventions on already-correct words are largely regularizations toward the standard orthography. Source code for replicability and reproducibility: https://github.com/ai4limba/spell-check.</p>
+                      <ul class="pg-kw" aria-label="Keywords"><li>Grammatical Error Correction</li><li>Low-Resource Languages</li><li>Sardinian</li><li>Minority Language Technology</li><li>Synthetic Data Generation</li><li>Responsible NLP</li></ul>
+                    </div>
+                  </details>
+                </li>
+                <li class="pg-paper" id="paper-3" data-start="2026-11-08T17:04:00+01:00" data-end="2026-11-08T17:16:00+01:00">
+                  <time class="pg-ptime" datetime="2026-11-08T17:04:00+01:00">5:04 PM</time>
+                  <details>
+                    <summary>
+                      <span class="pg-ptitle">Does Quantized AI Understand How We Speak? A Benchmark of ASR and Clinical LLM Pipelines for Italian Medical Documentation</span>
+                      <span class="pg-authors">Alessio Acunzo, Mariano Barone, Francesco Di Serio, Giuseppe Riccio and Antonio Romano</span>
+                      <span class="pg-more"><span class="pg-hint">Abstract</span><i class="bi bi-chevron-down" aria-hidden="true"></i></span>
+                    </summary>
+                    <div class="pg-abstract">
+                      <p class="pg-affil"><i class="bi bi-building" aria-hidden="true"></i> University of Naples Federico II</p>
+                      <p>Ambient documentation systems that couple automatic speech recognition (ASR) with large language models (LLMs) promise to reduce clinical documentation burden, but privacy regulations and limited IT budgets push many healthcare providers toward on-premise deployment on consumer-grade hardware. Post-training quantization (PTQ) is the standard way to fit state-of-the-art speech and language models into such budgets, yet its effect on downstream clinical tasks, as opposed to generic benchmark accuracy, remains poorly characterized outside English. We present a benchmark of PTQ across an Italian-language clinical ASR-plus-LLM pipeline running on an 8 GB-VRAM consumer GPU. We evaluate six ASR models spanning three architectures (encoder-decoder, CTC, and speech-LLM designs) across eleven quantization levels, and a clinical LLM (MedGemma 1.5 4B IT) across twenty-one levels on three downstream tasks (named entity recognition, summarization, and speaker attribution), using a small corpus of eight simulated Italian clinician-patient consultations (≈46 min). In the absence of human-annotated references, every score measures degradation relative to the same model’s own full-precision output, not absolute accuracy: the results characterize robustness to quantization and are not a ranking of models by correctness. Under these conditions we observe that transcription-level Word Error Rate alone is an incomplete selection criterion, since the CTC model without native punctuation loses word-level information far faster than its character error rate suggests; that several model-quantization combinations collapse abruptly rather than gracefully; and that the three downstream tasks tolerate LLM compression at markedly different rates, with entity extraction the most fragile and summarization the most robust. From these observations we derive provisional quantization thresholds, which have not been clinically validated, and five candidate pipeline configurations for clinics operating under tight hardware and privacy constraints. Evaluated model checkpoints are listed at https://huggingface.co/collections/praiselab-picuslab/does-quantized-ai-understand-how-we-speak.</p>
+                      <ul class="pg-kw" aria-label="Keywords"><li>post-training quantization</li><li>automatic speech recognition</li><li>clinical natural language processing</li><li>large language models</li><li>edge deployment</li><li>ambient clinical documentation</li><li>benchmarking</li></ul>
+                    </div>
+                  </details>
+                </li>
+                <li class="pg-paper" id="paper-12" data-start="2026-11-08T17:16:00+01:00" data-end="2026-11-08T17:28:00+01:00">
+                  <time class="pg-ptime" datetime="2026-11-08T17:16:00+01:00">5:16 PM</time>
+                  <details>
+                    <summary>
+                      <span class="pg-ptitle">A Cost-Effective Vision Pipeline for Railway Monitoring</span>
+                      <span class="pg-authors">Vincenzo Carandente, Giancarlo Sperlì and Andrea Vignali</span>
+                      <span class="pg-more"><span class="pg-hint">Abstract</span><i class="bi bi-chevron-down" aria-hidden="true"></i></span>
+                    </summary>
+                    <div class="pg-abstract">
+                      <p class="pg-affil"><i class="bi bi-building" aria-hidden="true"></i> University of Naples Federico II</p>
+                      <p>Railway infrastructure inspection is essential for ensuring operational safety and supporting timely maintenance; however, conventional monitoring frequently depends on manual surveys, dedicated inspection vehicles, unmanned aerial vehicles, LiDAR systems, or other costly sensing platforms. This study investigates a cost-effective, camera-based methodology for identifying railway infrastructure components and potentially safety-relevant objects using images acquired with conventional cameras. Two complementary visual-analysis paradigms are compared. The first employs RF-DETR Nano, a compact transformer-based object detector fine-tuned on a railway-specific subset of RailSem19. The original semantic annotations were adapted to an object-detection taxonomy comprising 12 infrastructure and environmental classes and converted into bounding-box representations. The second approach uses a commercial multimodal large language model accessed through a web interface and guided by standardized natural-language prompts. Its responses are requested in a structured format and repeatedly generated under equivalent conditions to examine recognition capability, contextual reasoning, and output consistency. The two approaches are assessed with respect to object recognition, spatial localization, inference characteristics, reproducibility, and interpretability. Preliminary qualitative findings indicate that the multimodal model provides broader contextual descriptions, improved recognition of barriers, and more precise delineation of railway tracks. Nevertheless, it may generate plausible but incorrect object classes, demonstrating the risk of hallucination and limited confidence calibration. Conversely, RF-DETR Nano provides structured and reproducible detections and more reliably identifies domain-specific components, particularly poles and overhead wires, although its recognition capability remains constrained by the categories represented in its training data. These findings suggest that task-specific detection and general-purpose multimodal reasoning should not be regarded as interchangeable technologies. Instead, they may support complementary stages of railway inspection. Given the safety-critical nature of the application, all model outputs are treated as decision-support information requiring validation by qualified personnel rather than as autonomous maintenance decisions.</p>
+                      <ul class="pg-kw" aria-label="Keywords"><li>Railway infrastructure monitoring</li><li>Object detection</li><li>RF-DETR Nano</li><li>Large language models</li><li>Vision-language models</li><li>Computer vision</li></ul>
+                    </div>
+                  </details>
+                </li>
+                <li class="pg-paper pg-panel" data-start="2026-11-08T17:28:00+01:00" data-end="2026-11-08T17:40:00+01:00">
+                  <time class="pg-ptime" datetime="2026-11-08T17:28:00+01:00">5:28 PM</time>
+                  <div><span class="pg-ptitle"><i class="bi bi-people" aria-hidden="true"></i> Joint panel Q&amp;A</span><span class="pg-authors">All Session II presenters, moderated by the organizers.</span></div>
+                </li>
+              </ol>
+            </div>
+          </li>
+          <li class="pg-slot" data-start="2026-11-08T17:40:00+01:00" data-end="2026-11-08T18:10:00+01:00">
+            <div class="pg-time"><time datetime="2026-11-08T17:40:00+01:00">5:40 PM</time><span class="pg-dur">30 min</span></div>
+            <div class="pg-body">
+              <h3><i class="bi bi-chat-square-text" aria-hidden="true"></i> Open Discussion and Closing</h3>
+              <p>Open challenges for GenAI systems serving vulnerable and underserved populations, next steps, and the planned special issue.</p>
+            </div>
+          </li>
+        </ol>
       </div>
     </section>
     <section id="speakers" class="section">
@@ -780,5 +1330,64 @@
     </div>
   </footer>
   <script src="assets/js/main.js"></script>
+  <script>
+    /* Program: expand/collapse all abstracts, deep links to papers, live "Now" marker on the day. */
+    (function () {
+      var program = document.getElementById('program');
+      if (!program) return;
+      var details = Array.prototype.slice.call(program.querySelectorAll('.pg-paper details'));
+      var toggle = document.getElementById('pg-toggle-all');
+
+      function syncToggle() {
+        var allOpen = details.length && details.every(function (d) { return d.open; });
+        toggle.setAttribute('aria-pressed', allOpen ? 'true' : 'false');
+        toggle.querySelector('span').textContent = allOpen ? 'Collapse all abstracts' : 'Expand all abstracts';
+        toggle.querySelector('i').className = allOpen ? 'bi bi-arrows-collapse' : 'bi bi-arrows-expand';
+      }
+
+      if (toggle) {
+        toggle.addEventListener('click', function () {
+          var open = toggle.getAttribute('aria-pressed') !== 'true';
+          details.forEach(function (d) { d.open = open; });
+          syncToggle();
+        });
+      }
+
+      details.forEach(function (d) {
+        d.addEventListener('toggle', function () {
+          syncToggle();
+          var li = d.closest('.pg-paper');
+          if (d.open && li && li.id && history.replaceState) {
+            history.replaceState(null, '', '#' + li.id);
+          }
+        });
+      });
+
+      function openFromHash() {
+        var id = location.hash.slice(1);
+        if (!/^paper-\d+$/.test(id)) return;
+        var li = document.getElementById(id);
+        var d = li && li.querySelector('details');
+        if (d) {
+          d.open = true;
+          li.scrollIntoView({ block: 'center' });
+        }
+      }
+      window.addEventListener('hashchange', openFromHash);
+      openFromHash();
+
+      var timed = Array.prototype.slice.call(program.querySelectorAll('[data-start][data-end]'));
+      function markLive() {
+        var now = Date.now();
+        timed.forEach(function (el) {
+          var s = Date.parse(el.dataset.start), e = Date.parse(el.dataset.end);
+          el.classList.toggle('is-live', now >= s && now < e);
+          el.classList.toggle('pg-done', el.classList.contains('pg-slot') && now >= e && now - e < 12 * 3600e3);
+        });
+      }
+      markLive();
+      setInterval(markLive, 30000);
+    })();
+  </script>
 </body>
 </html>
