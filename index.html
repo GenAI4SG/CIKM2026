@@ -497,6 +497,10 @@
       line-height: 1.25;
     }
 
+    .pg-session-head h3:last-child {
+      margin-bottom: 0;
+    }
+
     .pg-session-head p {
       margin: 0;
       opacity: .78;
@@ -510,23 +514,13 @@
     }
 
     .pg-paper {
-      display: grid;
-      grid-template-columns: 78px 1fr;
-      gap: 1rem;
+      display: block;
       padding: 1rem 1.6rem;
       position: relative;
     }
 
     .pg-paper + .pg-paper {
       border-top: 1px solid var(--sp-line);
-    }
-
-    .pg-ptime {
-      font-variant-numeric: tabular-nums;
-      font-size: .88rem;
-      font-weight: 600;
-      opacity: .7;
-      padding-top: .1rem;
     }
 
     .pg-paper details > summary {
@@ -656,8 +650,7 @@
       box-shadow: none;
     }
 
-    .pg-slot.is-live > .pg-time::after,
-    .pg-paper.is-live > .pg-ptime::after {
+    .pg-slot.is-live > .pg-time::after {
       content: "Now";
       display: inline-flex;
       align-self: flex-start;
@@ -670,12 +663,6 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: .08em;
-    }
-
-    .pg-paper.is-live > .pg-ptime {
-      display: flex;
-      flex-direction: column;
-      opacity: 1;
     }
 
     .pg-done {
@@ -695,8 +682,6 @@
       }
 
       .pg-paper {
-        grid-template-columns: 1fr;
-        gap: .25rem;
         padding: 1rem 1.2rem;
       }
 
@@ -744,7 +729,7 @@
         <div class="event-facts" aria-label="Event details">
           <span class="event-pill"><i class="bi bi-calendar-event"></i> November 8, 2026</span>
           <span class="event-pill"><i class="bi bi-geo-alt"></i> Rome, Italy</span>
-          <span class="event-pill"><i class="bi bi-clock-history"></i> 2:00 &ndash; 6:10 PM</span>
+          <span class="event-pill"><i class="bi bi-clock-history"></i> 2:00 &ndash; 6:00 PM</span>
         </div>
         <div class="hero-actions">
           <a class="btn-main" href="#program"><i class="bi bi-calendar3"></i> View Program</a>
@@ -923,15 +908,14 @@
       <div class="container-xl">
         <div class="section-title">
           <span class="eyebrow">Program</span>
-          <h2>Sunday, November 8, 2:00 &ndash; 6:10 PM</h2>
-          <p>One invited talk and nine accepted papers in two topical sessions. Talks run back-to-back (12 minutes each), and questions are collected into a moderated panel with all session presenters seated together. All accepted papers appear in the CEUR-WS workshop proceedings. All times are local Rome time (CET). Click a paper title to read its abstract.</p>
+          <h2>Sunday, November 8, 2:00 &ndash; 6:00 PM</h2>
+          <p>One keynote by Microsoft and eleven papers arranged in two sessions. Each talk has 12 minutes for the presentation and Q&amp;A. Click a paper title to read its abstract.</p>
         </div>
         <div class="pg-toolbar">
           <div class="pg-stats" aria-label="Program at a glance">
             <span><i class="bi bi-mic" aria-hidden="true"></i> 1 invited talk</span>
-            <span><i class="bi bi-file-earmark-text" aria-hidden="true"></i> 9 papers</span>
+            <span><i class="bi bi-file-earmark-text" aria-hidden="true"></i> 11 papers</span>
             <span><i class="bi bi-collection" aria-hidden="true"></i> 2 sessions</span>
-            <span><i class="bi bi-people" aria-hidden="true"></i> 2 panels</span>
           </div>
           <button type="button" class="pg-toggle" id="pg-toggle-all" aria-pressed="false"><i class="bi bi-arrows-expand" aria-hidden="true"></i> <span>Expand all abstracts</span></button>
         </div>
@@ -940,7 +924,7 @@
             <div class="pg-time"><time datetime="2026-11-08T14:00:00+01:00">2:00 PM</time><span class="pg-dur">10 min</span></div>
             <div class="pg-body">
               <h3><i class="bi bi-door-open" aria-hidden="true"></i> Welcome and Opening</h3>
-              <p>Workshop motivation, overview of the program, and logistics.</p>
+              <p>Workshop motivation and overview of the program.</p>
             </div>
           </li>
           <li class="pg-slot pg-keynote" data-start="2026-11-08T14:10:00+01:00" data-end="2026-11-08T14:55:00+01:00">
@@ -952,17 +936,15 @@
               <p class="pg-speaker"><strong>Donato Pasqualicchio</strong>, Microsoft</p>
             </div>
           </li>
-          <li class="pg-slot pg-session-slot" id="session-i" data-start="2026-11-08T14:55:00+01:00" data-end="2026-11-08T16:10:00+01:00">
-            <div class="pg-time"><time datetime="2026-11-08T14:55:00+01:00">2:55 PM</time><span class="pg-dur">75 min</span></div>
+          <li class="pg-slot pg-session-slot" id="session-i" data-start="2026-11-08T14:55:00+01:00" data-end="2026-11-08T16:00:00+01:00">
+            <div class="pg-time"><time datetime="2026-11-08T14:55:00+01:00">2:55 PM</time><span class="pg-dur">65 min</span></div>
             <div class="pg-session">
               <header class="pg-session-head">
-                <span class="pg-tag">Paper Session I &middot; 2:55 PM &ndash; 4:10 PM</span>
+                <span class="pg-tag">Paper Session I &middot; 2:55 PM &ndash; 4:00 PM</span>
                 <h3>Trustworthy Generative AI: Facts, Bias, and Evidence</h3>
-                <p>Do generative systems stay faithful to what matters? Evidence placement in retrieval-augmented fact-checking, tone-induced sycophancy, inference-time debiasing, and whether synthetic data preserves the scientific evidence of the cohorts it augments.</p>
               </header>
               <ol class="pg-papers">
-                <li class="pg-paper" id="paper-1" data-start="2026-11-08T14:55:00+01:00" data-end="2026-11-08T15:07:00+01:00">
-                  <time class="pg-ptime" datetime="2026-11-08T14:55:00+01:00">2:55 PM</time>
+                <li class="pg-paper" id="paper-1">
                   <details>
                     <summary>
                       <span class="pg-ptitle">Context Shapes LLMs Retrieval-Augmented Fact-Checking Effectiveness</span>
@@ -976,8 +958,7 @@
                     </div>
                   </details>
                 </li>
-                <li class="pg-paper" id="paper-13" data-start="2026-11-08T15:07:00+01:00" data-end="2026-11-08T15:19:00+01:00">
-                  <time class="pg-ptime" datetime="2026-11-08T15:07:00+01:00">3:07 PM</time>
+                <li class="pg-paper" id="paper-13">
                   <details>
                     <summary>
                       <span class="pg-ptitle">Can You Please Be Wrong? How User and System Tone Shape Sycophancy and Factual Errors in Small-Scale LLMs</span>
@@ -991,12 +972,11 @@
                     </div>
                   </details>
                 </li>
-                <li class="pg-paper" id="paper-11" data-start="2026-11-08T15:19:00+01:00" data-end="2026-11-08T15:31:00+01:00">
-                  <time class="pg-ptime" datetime="2026-11-08T15:19:00+01:00">3:19 PM</time>
+                <li class="pg-paper" id="paper-11">
                   <details>
                     <summary>
                       <span class="pg-ptitle">Nonviolent Communication (NVC) as a Debiasing Strategy for Navigating the Bias–Utility Trade-off in Conversational AI</span>
-                      <span class="pg-authors">Venkata Satya Satvik Viriyala, Kartikeya Dimri, Ketaki Tamhanakar, Neha Tamhanakar and Vinu Ellampallil Venugopal</span>
+                      <span class="pg-authors">Venkata Satya Satvik Viriyala, Ketaki Tamhanakar, Neha Tamhanakar, Vinu E. Venugopal and Kartikeya Dimri</span>
                       <span class="pg-more"><span class="pg-hint">Abstract</span><i class="bi bi-chevron-down" aria-hidden="true"></i></span>
                     </summary>
                     <div class="pg-abstract">
@@ -1006,61 +986,53 @@
                     </div>
                   </details>
                 </li>
-                <li class="pg-paper" id="paper-8" data-start="2026-11-08T15:31:00+01:00" data-end="2026-11-08T15:43:00+01:00">
-                  <time class="pg-ptime" datetime="2026-11-08T15:31:00+01:00">3:31 PM</time>
+                <li class="pg-paper" id="paper-14">
                   <details>
                     <summary>
-                      <span class="pg-ptitle">Beyond Predictive Similarity: StableSynth for Resampling-Aware Evidence Preservation in Synthetic Biomedical Data</span>
-                      <span class="pg-authors">Adam Kiersztyn, Krystyna Kiersztyn, Mateusz Turowicz, Jakub Chromiak, Ryszard Sitarz, Kaja Karakuła, Robert Karpiński, Anna Rymuszka, Dariusz Juchnowicz, Anna Machrowska, Joanna Róg and Hanna Karakuła-Juchnowicz</span>
+                      <span class="pg-ptitle">Quantifying and Mitigating Korean Jamo-Level Typographical Vulnerabilities in Large Language Models</span>
+                      <span class="pg-authors">Seojin Lee and Hwanhee Lee</span>
                       <span class="pg-more"><span class="pg-hint">Abstract</span><i class="bi bi-chevron-down" aria-hidden="true"></i></span>
                     </summary>
                     <div class="pg-abstract">
-                      <p class="pg-affil"><i class="bi bi-building" aria-hidden="true"></i> Lublin University of Technology; Medical University of Lublin; The John Paul II Catholic University of Lublin</p>
-                      <p>Synthetic augmentation is attractive in small biomedical cohorts in which metabolic and inflammatory measurements are correlated and prediction models may be used to prioritize follow-up variables. Conventional synthetic-data evaluation examines distributional fidelity, predictive utility, and privacy, but does not directly test whether the same model-selected variables recur after augmentation. We introduce StableSynth, a paired-resampling audit separating predictive behavior from the preservation and stability of model-derived feature sets. On 113 quality-controlled subjects and 79 biochemical variables, we compared six classical augmentation controls and a conditional variational autoencoder (CVAE) over 25 matched train–test folds. Gaussian Copula achieved mean AUC 0.882, equal to real-only training, while Top-15 Evidence Preservation Score (EPS) was 0.477 and selection stability decreased from 0.544 to 0.406. Increasing CVAE augmentation from 0.5× to 2× reduced EPS from 0.591 to 0.346. A new threshold-sensitivity analysis (k = 5, 10, 15, 20, 25) recovers similar evidence-set divergence; all-feature rank correlations and normalized-importance distances further show that identity overlap does not fully capture importance changes. Random-Forest and full-cohort analyses support the qualitative pattern. These observations demonstrate that apparently preserved discrimination may coexist with a different and less recurrent model-selected feature set; they do not establish the validity or invalidity of specific clinical biomarkers.</p>
-                      <ul class="pg-kw" aria-label="Keywords"><li>synthetic biomedical data</li><li>model-derived evidence</li><li>resampling stability</li><li>synthetic augmentation</li><li>reproducibility</li><li>trustworthy AI</li></ul>
+                      <p class="pg-affil"><i class="bi bi-building" aria-hidden="true"></i> Chung-Ang University</p>
+                      <p>Korean syllable blocks are composed of jamo, allowing keyboard errors to occur within a syllable and produce either valid but semantically altered characters or exposed raw jamo-failure modes not captured by ordinary character-level edit models. We study this robustness gap using five keyboard-grounded Korean typo types on KMMLU across four LLMs. Accuracy declines with perturbation intensity, and neither model scale nor Korean specialization removes the vulnerability. Typo-corrupted inputs also induce a distinct hidden-state shift separate from ordinary answer incorrectness, enabling a lightweight linear probe to generalize to unseen typo types. Building on this signal, we propose TACoT, which invokes chain-of-thought (CoT) only when the probe detects likely corruption. TACoT preserves much of full-CoT robustness while reducing average output length by approximately 37%, and generalizes to free-form mathematical reasoning; rate-matched random routing confirms that the benefit comes from probe-informed routing. These results motivate writing-system-aware robustness evaluation and resource-aware mitigation for multilingual LLM deployment.</p>
+                      <ul class="pg-kw" aria-label="Keywords"><li>Korean jamo</li><li>Typographical robustness</li><li>Large language models</li></ul>
                     </div>
                   </details>
                 </li>
-                <li class="pg-paper" id="paper-9" data-start="2026-11-08T15:43:00+01:00" data-end="2026-11-08T15:55:00+01:00">
-                  <time class="pg-ptime" datetime="2026-11-08T15:43:00+01:00">3:43 PM</time>
+                <li class="pg-paper" id="paper-15">
                   <details>
                     <summary>
-                      <span class="pg-ptitle">AMR-Synth: Preserving Rare Resistance Architectures under Generative Augmentation in One-Health Surveillance</span>
-                      <span class="pg-authors">Adam Kiersztyn, Krystyna Kiersztyn, Mateusz Turowicz, Jakub Chromiak, Kinga Ożga-Wybranowska, Ilona Sadok, Daniel Klich, Marta Gałązka and Rafał Łopucki</span>
+                      <span class="pg-ptitle">Clarification Is Not Resolution: A Transition Audit for Small Rule-Reading Models</span>
+                      <span class="pg-authors">Yuhao Xu</span>
                       <span class="pg-more"><span class="pg-hint">Abstract</span><i class="bi bi-chevron-down" aria-hidden="true"></i></span>
                     </summary>
                     <div class="pg-abstract">
-                      <p class="pg-affil"><i class="bi bi-building" aria-hidden="true"></i> Lublin University of Technology; The John Paul II Catholic University of Lublin; Warsaw University of Life Sciences; Maria Curie-Skłodowska University</p>
-                      <p>A larger synthetic surveillance table need not retain the long-tailed biological evidence of the original observations. We examine that distinction in ten-drug phenotypic antimicrobial resistance profiles obtained from 157 independent wild-bird admissions, representing 220 Escherichia coli isolates and 36 bird species. Forty-nine complete resistance patterns were observed, including 42 infrequent resistant patterns (frequency at most two). We evaluate group-aware rarity-aware latent resampling (G-RALR) using the Rare Resistance Preservation Score (RRPS), which combines coverage of real rare patterns, calibration of their probability mass, and preservation of pairwise co-resistance. Because the historical source code and per-run results were unavailable, we report an explicitly independent reconstruction using a fully specified conditional variational autoencoder and deposited analysis scripts. Across 200 generated cohorts per setting, RRPS increased from 0.726 without rarity emphasis to 0.784 and 0.793 with moderate rare-donor probabilities of 0.1 and 0.2; more aggressive emphasis reduced RRPS to 0.761. Ecological donor matching improved RRPS from 0.749 to 0.793 at probability 0.2. In held-out real-bird evaluation, rMDR ROC AUC was 0.713 using real training data alone, compared with 0.693, 0.685, and 0.676 after one-, three-, and five-times matched synthetic augmentation. Alternative RRPS weights changed the preference between moderate operating points. The findings support a preservation–utility–dose assessment: rare-profile recovery, predictive utility, and synthetic volume must be evaluated separately. These results are conditional on one reconstructed implementation, one observational cohort, and repeated rather than externally independent held-out partitions.</p>
-                      <ul class="pg-kw" aria-label="Keywords"><li>synthetic tabular data</li><li>antimicrobial resistance</li><li>One Health</li><li>rare patterns</li><li>conditional variational autoencoder</li><li>wildlife surveillance</li><li>preservation</li><li>leakage-safe validation</li></ul>
+                      <p class="pg-affil"><i class="bi bi-building" aria-hidden="true"></i> Guizhou University</p>
+                      <p>A clarification answer supplies a fact; it does not necessarily resolve the user’s original question. We reconstruct 724 compatible before/after pairs from ShARC annotations and reserve 468 pairs from 117 source components for evaluation. On two frozen Qwen2.5 models, a supervised readout of changes in decision logits reaches 45.1% and 48.3% accuracy, but its improvement intervals over current-logit readouts include zero. Copying the latest yes/no answer scores 70.1% yet misses all 55 unresolved successors. Separating the latest turn improves the 1.5B model’s direct accuracy to 52.8% without recovering these cases. Post-result diagnostics reveal substantial output-format sensitivity and show that nearly unchanged aggregate scores can conceal changed decisions: deleting rules leaves 50.9% original-label agreement but retains only 42.7% of the separated 1.5B predictions. A further Qwen3-1.7B diagnostic crosses two encodings and four orders. Word averaging recovers 27/55 unresolved cases, but reaches only 43.2% total accuracy with 44.3% error among terminal outputs. These results distinguish shortcut accuracy, recognition of missing information and terminal reliability. The released transition cohort, raw logits and executable audits support evaluation of those distinctions; they do not establish a superior reasoning method or reliable public-service advice.</p>
+                      <ul class="pg-kw" aria-label="Keywords"><li>Clarification</li><li>Rule-reading models</li><li>Question answering</li></ul>
                     </div>
                   </details>
-                </li>
-                <li class="pg-paper pg-panel" data-start="2026-11-08T15:55:00+01:00" data-end="2026-11-08T16:10:00+01:00">
-                  <time class="pg-ptime" datetime="2026-11-08T15:55:00+01:00">3:55 PM</time>
-                  <div><span class="pg-ptitle"><i class="bi bi-people" aria-hidden="true"></i> Joint panel Q&amp;A</span><span class="pg-authors">All Session I presenters, moderated by the organizers.</span></div>
                 </li>
               </ol>
             </div>
           </li>
-          <li class="pg-slot pg-break" data-start="2026-11-08T16:10:00+01:00" data-end="2026-11-08T16:40:00+01:00">
-            <div class="pg-time"><time datetime="2026-11-08T16:10:00+01:00">4:10 PM</time><span class="pg-dur">30 min</span></div>
+          <li class="pg-slot pg-break" data-start="2026-11-08T16:00:00+01:00" data-end="2026-11-08T16:30:00+01:00">
+            <div class="pg-time"><time datetime="2026-11-08T16:00:00+01:00">4:00 PM</time><span class="pg-dur">30 min</span></div>
             <div class="pg-body">
               <h3><i class="bi bi-easel" aria-hidden="true"></i> Coffee Break with Posters and Demos</h3>
               <p>Authors of accepted papers can present posters or live demos of their work, with informal discussion among presenters and attendees.</p>
             </div>
           </li>
-          <li class="pg-slot pg-session-slot" id="session-ii" data-start="2026-11-08T16:40:00+01:00" data-end="2026-11-08T17:40:00+01:00">
-            <div class="pg-time"><time datetime="2026-11-08T16:40:00+01:00">4:40 PM</time><span class="pg-dur">60 min</span></div>
+          <li class="pg-slot pg-session-slot" id="session-ii" data-start="2026-11-08T16:30:00+01:00" data-end="2026-11-08T17:45:00+01:00">
+            <div class="pg-time"><time datetime="2026-11-08T16:30:00+01:00">4:30 PM</time><span class="pg-dur">75 min</span></div>
             <div class="pg-session">
               <header class="pg-session-head">
-                <span class="pg-tag">Paper Session II &middot; 4:40 PM &ndash; 5:40 PM</span>
+                <span class="pg-tag">Paper Session II &middot; 4:30 PM &ndash; 5:45 PM</span>
                 <h3>Low-Resource Settings: Languages, Health, and Infrastructure</h3>
-                <p>Building and deploying under real constraints: minority languages with scarce annotated data, on-premise clinical pipelines on consumer GPUs, and low-cost camera-based monitoring of safety-critical infrastructure.</p>
               </header>
               <ol class="pg-papers">
-                <li class="pg-paper" id="paper-6" data-start="2026-11-08T16:40:00+01:00" data-end="2026-11-08T16:52:00+01:00">
-                  <time class="pg-ptime" datetime="2026-11-08T16:40:00+01:00">4:40 PM</time>
+                <li class="pg-paper" id="paper-6">
                   <details>
                     <summary>
                       <span class="pg-ptitle">Benchmarking Pretrained Encoders for POS Tagging in Minority Languages</span>
@@ -1074,12 +1046,11 @@
                     </div>
                   </details>
                 </li>
-                <li class="pg-paper" id="paper-10" data-start="2026-11-08T16:52:00+01:00" data-end="2026-11-08T17:04:00+01:00">
-                  <time class="pg-ptime" datetime="2026-11-08T16:52:00+01:00">4:52 PM</time>
+                <li class="pg-paper" id="paper-10">
                   <details>
                     <summary>
                       <span class="pg-ptitle">A Context-Aware Neural Spell Checker for Campidanese Sardinian in Low-Resource Settings</span>
-                      <span class="pg-authors">Salvatore Mario Carta, Filippo Concas, Alessandro Giuliani, Marco Manolo Manca, Mirko Marras and Alessandro Sebastian Podda</span>
+                      <span class="pg-authors">Salvatore Carta, Filippo Concas, Alessandro Giuliani, Marco Manolo Manca, Mirko Marras and Alessandro Sebastian Podda</span>
                       <span class="pg-more"><span class="pg-hint">Abstract</span><i class="bi bi-chevron-down" aria-hidden="true"></i></span>
                     </summary>
                     <div class="pg-abstract">
@@ -1089,8 +1060,7 @@
                     </div>
                   </details>
                 </li>
-                <li class="pg-paper" id="paper-3" data-start="2026-11-08T17:04:00+01:00" data-end="2026-11-08T17:16:00+01:00">
-                  <time class="pg-ptime" datetime="2026-11-08T17:04:00+01:00">5:04 PM</time>
+                <li class="pg-paper" id="paper-3">
                   <details>
                     <summary>
                       <span class="pg-ptitle">Does Quantized AI Understand How We Speak? A Benchmark of ASR and Clinical LLM Pipelines for Italian Medical Documentation</span>
@@ -1104,8 +1074,35 @@
                     </div>
                   </details>
                 </li>
-                <li class="pg-paper" id="paper-12" data-start="2026-11-08T17:16:00+01:00" data-end="2026-11-08T17:28:00+01:00">
-                  <time class="pg-ptime" datetime="2026-11-08T17:16:00+01:00">5:16 PM</time>
+                <li class="pg-paper" id="paper-8">
+                  <details>
+                    <summary>
+                      <span class="pg-ptitle">Beyond Predictive Similarity: StableSynth for Resampling-Aware Evidence Preservation in Synthetic Biomedical Data</span>
+                      <span class="pg-authors">Adam Kiersztyn, Krystyna Kiersztyn, Mateusz Turowicz, Jakub Chromiak, Ryszard Sitarz, Kaja Karakuła, Robert Karpiński, Anna Rymuszka, Dariusz Juchnowicz, Anna Machrowska, Joanna Róg and Hanna Karakuła-Juchnowicz</span>
+                      <span class="pg-more"><span class="pg-hint">Abstract</span><i class="bi bi-chevron-down" aria-hidden="true"></i></span>
+                    </summary>
+                    <div class="pg-abstract">
+                      <p class="pg-affil"><i class="bi bi-building" aria-hidden="true"></i> Lublin University of Technology; Medical University of Lublin; The John Paul II Catholic University of Lublin</p>
+                      <p>Synthetic augmentation is attractive in small biomedical cohorts in which metabolic and inflammatory measurements are correlated and prediction models may be used to prioritize follow-up variables. Conventional synthetic-data evaluation examines distributional fidelity, predictive utility, and privacy, but does not directly test whether the same model-selected variables recur after augmentation. We introduce StableSynth, a paired-resampling audit separating predictive behavior from the preservation and stability of model-derived feature sets. On 113 quality-controlled subjects and 79 biochemical variables, we compared six classical augmentation controls and a conditional variational autoencoder (CVAE) over 25 matched train–test folds. Gaussian Copula achieved mean AUC 0.882, equal to real-only training, while Top-15 Evidence Preservation Score (EPS) was 0.477 and selection stability decreased from 0.544 to 0.406. Increasing CVAE augmentation from 0.5× to 2× reduced EPS from 0.591 to 0.346. A new threshold-sensitivity analysis (k = 5, 10, 15, 20, 25) recovers similar evidence-set divergence; all-feature rank correlations and normalized-importance distances further show that identity overlap does not fully capture importance changes. Random-Forest and full-cohort analyses support the qualitative pattern. These observations demonstrate that apparently preserved discrimination may coexist with a different and less recurrent model-selected feature set; they do not establish the validity or invalidity of specific clinical biomarkers.</p>
+                      <ul class="pg-kw" aria-label="Keywords"><li>synthetic biomedical data</li><li>model-derived evidence</li><li>resampling stability</li><li>synthetic augmentation</li><li>reproducibility</li><li>trustworthy AI</li></ul>
+                    </div>
+                  </details>
+                </li>
+                <li class="pg-paper" id="paper-9">
+                  <details>
+                    <summary>
+                      <span class="pg-ptitle">AMR-Synth: Preserving Rare Resistance Architectures under Generative Augmentation in One-Health Surveillance</span>
+                      <span class="pg-authors">Adam Kiersztyn, Krystyna Kiersztyn, Mateusz Turowicz, Jakub Chromiak, Kinga Ożga-Wybranowska, Ilona Sadok, Daniel Klich, Marta Gałązka and Rafał Łopucki</span>
+                      <span class="pg-more"><span class="pg-hint">Abstract</span><i class="bi bi-chevron-down" aria-hidden="true"></i></span>
+                    </summary>
+                    <div class="pg-abstract">
+                      <p class="pg-affil"><i class="bi bi-building" aria-hidden="true"></i> Lublin University of Technology; The John Paul II Catholic University of Lublin; Warsaw University of Life Sciences; Maria Curie-Skłodowska University</p>
+                      <p>A larger synthetic surveillance table need not retain the long-tailed biological evidence of the original observations. We examine that distinction in ten-drug phenotypic antimicrobial resistance profiles obtained from 157 independent wild-bird admissions, representing 220 Escherichia coli isolates and 36 bird species. Forty-nine complete resistance patterns were observed, including 42 infrequent resistant patterns (frequency at most two). We evaluate group-aware rarity-aware latent resampling (G-RALR) using the Rare Resistance Preservation Score (RRPS), which combines coverage of real rare patterns, calibration of their probability mass, and preservation of pairwise co-resistance. Because the historical source code and per-run results were unavailable, we report an explicitly independent reconstruction using a fully specified conditional variational autoencoder and deposited analysis scripts. Across 200 generated cohorts per setting, RRPS increased from 0.726 without rarity emphasis to 0.784 and 0.793 with moderate rare-donor probabilities of 0.1 and 0.2; more aggressive emphasis reduced RRPS to 0.761. Ecological donor matching improved RRPS from 0.749 to 0.793 at probability 0.2. In held-out real-bird evaluation, rMDR ROC AUC was 0.713 using real training data alone, compared with 0.693, 0.685, and 0.676 after one-, three-, and five-times matched synthetic augmentation. Alternative RRPS weights changed the preference between moderate operating points. The findings support a preservation–utility–dose assessment: rare-profile recovery, predictive utility, and synthetic volume must be evaluated separately. These results are conditional on one reconstructed implementation, one observational cohort, and repeated rather than externally independent held-out partitions.</p>
+                      <ul class="pg-kw" aria-label="Keywords"><li>synthetic tabular data</li><li>antimicrobial resistance</li><li>One Health</li><li>rare patterns</li><li>conditional variational autoencoder</li><li>wildlife surveillance</li><li>preservation</li><li>leakage-safe validation</li></ul>
+                    </div>
+                  </details>
+                </li>
+                <li class="pg-paper" id="paper-12">
                   <details>
                     <summary>
                       <span class="pg-ptitle">A Cost-Effective Vision Pipeline for Railway Monitoring</span>
@@ -1119,15 +1116,11 @@
                     </div>
                   </details>
                 </li>
-                <li class="pg-paper pg-panel" data-start="2026-11-08T17:28:00+01:00" data-end="2026-11-08T17:40:00+01:00">
-                  <time class="pg-ptime" datetime="2026-11-08T17:28:00+01:00">5:28 PM</time>
-                  <div><span class="pg-ptitle"><i class="bi bi-people" aria-hidden="true"></i> Joint panel Q&amp;A</span><span class="pg-authors">All Session II presenters, moderated by the organizers.</span></div>
-                </li>
               </ol>
             </div>
           </li>
-          <li class="pg-slot" data-start="2026-11-08T17:40:00+01:00" data-end="2026-11-08T18:10:00+01:00">
-            <div class="pg-time"><time datetime="2026-11-08T17:40:00+01:00">5:40 PM</time><span class="pg-dur">30 min</span></div>
+          <li class="pg-slot" data-start="2026-11-08T17:45:00+01:00" data-end="2026-11-08T18:00:00+01:00">
+            <div class="pg-time"><time datetime="2026-11-08T17:45:00+01:00">5:45 PM</time><span class="pg-dur">15 min</span></div>
             <div class="pg-body">
               <h3><i class="bi bi-chat-square-text" aria-hidden="true"></i> Open Discussion and Closing</h3>
               <p>Open challenges for GenAI systems serving vulnerable and underserved populations, next steps, and the planned special issue.</p>
@@ -1367,11 +1360,10 @@
         var id = location.hash.slice(1);
         if (!/^paper-\d+$/.test(id)) return;
         var li = document.getElementById(id);
-        var d = li && li.querySelector('details');
-        if (d) {
-          d.open = true;
-          li.scrollIntoView({ block: 'center' });
-        }
+        if (!li) return;
+        var d = li.querySelector('details');
+        if (d) d.open = true;
+        li.scrollIntoView({ block: 'center' });
       }
       window.addEventListener('hashchange', openFromHash);
       openFromHash();
